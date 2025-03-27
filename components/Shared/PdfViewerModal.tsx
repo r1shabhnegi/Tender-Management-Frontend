@@ -1,9 +1,19 @@
 "use client";
 import React, { FC, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
-import { Viewer } from "@react-pdf-viewer/core";
+// Use dynamic import for PDF viewer components
+const Viewer = dynamic(
+  () => import("@react-pdf-viewer/core").then((mod) => mod.Viewer),
+  { ssr: false }
+);
+const Worker = dynamic(
+  () => import("@react-pdf-viewer/core").then((mod) => mod.Worker),
+  { ssr: false }
+);
 
-import { Worker } from "@react-pdf-viewer/core";
+// Import styles
+import "@react-pdf-viewer/core/lib/styles/index.css";
 
 interface Props {
   file: string | ArrayBuffer | Blob | null;

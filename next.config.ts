@@ -15,6 +15,16 @@ const nextConfig: NextConfig = {
         canvas: false,
       },
     };
+
+    // Add rule for binary modules
+    config.module = config.module || {};
+    config.module.rules = config.module.rules || [];
+    config.module.rules.push({
+      test: /\.node$/,
+      use: "node-loader",
+      type: "javascript/auto",
+    });
+
     return config;
   },
 };
