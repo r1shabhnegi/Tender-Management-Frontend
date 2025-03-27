@@ -19,6 +19,7 @@ import { ITenderCard } from "@/app/Types/Tender-Types";
 
 const TenderCard: FC<{ tender: ITenderCard }> = ({ tender }) => {
   const router = useRouter();
+
   return (
     <div className='relative bg-card-color  rounded-xl border  max-w-[55rem] p-6 '>
       <div className='flex gap-6'>
@@ -65,7 +66,7 @@ const TenderCard: FC<{ tender: ITenderCard }> = ({ tender }) => {
             </div>
             <div className='flex items-center text-gray-700'>
               <FileCode2 className='w-4 h-4 mr-2' />
-              <span className='text-sm'>#TN{tender.tender_number}</span>
+              <span className='text-sm'>#TN{tender.tenderNumber}</span>
             </div>
           </div>
         </div>
@@ -77,8 +78,8 @@ const TenderCard: FC<{ tender: ITenderCard }> = ({ tender }) => {
             <div className='flex items-center text-orange-700'>
               <Calendar className='w-4 h-4 mr-2' />
               <span className='text-sm font-medium'>
-                Bid Ends:{" "}
-                {format(tender.bid_submission_end_date, "dd MMM yyyy")}
+                Bid Ends:
+                {format(tender?.bidEndDate, "PPP")}
               </span>
             </div>
             <div className='space-y-2'>
@@ -86,7 +87,7 @@ const TenderCard: FC<{ tender: ITenderCard }> = ({ tender }) => {
                 <FileText className='w-4 h-4 mr-2' />
                 <span className='text-sm flex items-center'>
                   Doc Fee: <IndianRupee className='w-3 h-3 ml-2' />
-                  {tender.doc_fee}
+                  {tender.documentFee}
                 </span>
               </div>
               <div className='flex items-center text-gray-700'>

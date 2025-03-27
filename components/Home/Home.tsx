@@ -52,7 +52,7 @@ const Home = () => {
         <div className='flex flex-col gap-5'>
           {data?.tenders.map((tender: ITenderCard) => (
             <TenderCard
-              key={tender.id}
+              key={tender?.id}
               tender={tender}
             />
           ))}

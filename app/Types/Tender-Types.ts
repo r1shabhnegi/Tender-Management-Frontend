@@ -54,9 +54,9 @@ export interface ITenderCard {
   id: string;
   title: string;
   status: string;
-  tender_number: string;
-  bid_submission_end_date: string;
-  doc_fee: string;
+  tenderNumber: string;
+  bidEndDate: string;
+  documentFee: string;
   emd: string;
   department: string;
   type: string;
