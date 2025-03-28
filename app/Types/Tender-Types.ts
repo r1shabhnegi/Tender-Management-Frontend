@@ -27,7 +27,7 @@ export interface ITenderFeeDetails {
   documentFee: string;
   feePayableAt: string;
   EMD: string;
-  edmPayableAt: string;
+  emdPayableAt: string;
   tenderLocation: string;
   tenderValue: string;
 }
