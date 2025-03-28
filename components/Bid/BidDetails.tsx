@@ -1,14 +1,11 @@
 "use client";
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC } from "react";
 import { FileText, Building, User } from "lucide-react";
 
-import { formatDistanceToNow } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
-import StatusBadge from "../Tender/StatusBadge";
 import { DocumentLink } from "./Components";
-import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { useGetBidByIdQuery } from "@/Redux/bid/bidApi";
 import PageLoading from "../Shared/PageLoading";
@@ -37,7 +34,9 @@ interface Props {
 }
 
 const BidDetails: FC<Props> = ({ tenderId, bidId }) => {
-  const { data, isLoading, error } = useGetBidByIdQuery(bidId);
+  const { data, isLoading } = useGetBidByIdQuery(bidId);
+
+  console.log(tenderId);
 
   if (isLoading) return <PageLoading />;
 
