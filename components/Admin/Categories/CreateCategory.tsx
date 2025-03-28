@@ -25,6 +25,7 @@ import InfoCard from "@/components/Shared/InfoCard";
 
 interface FormData {
   name: string;
+  shortName: string;
   type: "main category" | "sub category";
   scope: "product" | "service";
   status: "active" | "inactive";
@@ -46,6 +47,7 @@ const CreateCategory = () => {
   } = useForm<FormData>({
     defaultValues: {
       name: "",
+      shortName: "",
       type: "main category",
       scope: "product",
       status: "active",
@@ -79,6 +81,7 @@ const CreateCategory = () => {
       const category = categoryDataById.category;
       reset({
         name: category.name,
+        shortName: category.shortName,
         type: category.type.toLowerCase() as "main category" | "sub category",
         scope: category.scope as "product" | "service",
         status: category.status as "active" | "inactive",
@@ -97,6 +100,7 @@ const CreateCategory = () => {
     try {
       const categoryPayload = {
         name: data.name,
+        shortName: data.shortName.toUpperCase(),
         type: data.type,
         scope: data.scope,
         status: data.status,
@@ -165,6 +169,23 @@ const CreateCategory = () => {
             />
             {errors.name && (
               <p className='text-red-500 text-sm mt-1'>{errors.name.message}</p>
+            )}
+          </div>
+          <div className='flex flex-col flex-1 justify-center'>
+            <label className={formLabelStyle}>Short Name</label>
+            <Input
+              className={inputStyle}
+              type='text'
+              maxLength={3}
+              placeholder='Enter Short Name'
+              {...register("shortName", {
+                required: "Short Name is required",
+              })}
+            />
+            {errors.shortName && (
+              <p className='text-red-500 text-sm mt-1'>
+                {errors.shortName.message}
+              </p>
             )}
           </div>
           {/* Category Type */}

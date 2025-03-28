@@ -86,7 +86,7 @@ interface TenderDataResponse {
 }
 
 interface ApiResponse {
-  isSuccess: boolean;
+  success: boolean;
   tenderData: TenderDataResponse;
 }
 

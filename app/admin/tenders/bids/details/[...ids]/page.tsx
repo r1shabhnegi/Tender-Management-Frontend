@@ -2,11 +2,13 @@ import Heading from "@/components/Shared/Heading";
 import BidDetails from "@/components/Bid/BidDetails";
 import React, { use } from "react";
 
-const Details = ({ params }: { params: Promise<{ id: string }> }) => {
+const Details = ({ params }: { params: Promise<{ ids: string[] }> }) => {
   const resolvedParams = use(params);
-  const page = resolvedParams;
+  const { ids } = resolvedParams;
 
-  console.log(page);
+  const tenderId = ids[0];
+  const bidId = ids[1];
+
   return (
     <div className='pt-[3.8rem]'>
       <Heading
@@ -14,7 +16,10 @@ const Details = ({ params }: { params: Promise<{ id: string }> }) => {
         description='A platform for venders to bid'
         keywords='Tender, Vender, Projects'
       />
-      <BidDetails />
+      <BidDetails
+        tenderId={tenderId}
+        bidId={bidId}
+      />
     </div>
   );
 };

@@ -16,6 +16,7 @@ const Header = () => {
     isRefreshing: isLoading,
     user: { role },
   } = useSelector((state: RootState) => state.authSlice);
+  console.log(role, isLoggedIn);
 
   return (
     <header className='fixed border-b backdrop-blur-sm top-0 left-0 flex items-center w-full px-20 z-[50] h-[3.8rem]'>

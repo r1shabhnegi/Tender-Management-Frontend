@@ -94,14 +94,14 @@ const TenderFeeDetails: FC<Props> = ({ setActive }) => {
           <div className='flex-1'>
             <label
               className={`${formLabelStyle}`}
-              htmlFor='edmPayableAt'>
+              htmlFor='emdPayableAt'>
               EMD Payable At
             </label>
             <Textarea
-              id='edmPayableAt'
+              id='emdPayableAt'
               className={inputStyle}
               placeholder='Enter location where EMD is payable'
-              {...register("tenderFeeDetails.edmPayableAt")}
+              {...register("tenderFeeDetails.emdPayableAt")}
             />
           </div>
         </div>

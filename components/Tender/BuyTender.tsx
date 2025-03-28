@@ -178,7 +178,7 @@ const BuyTender = ({ tenderId }: Props): JSX.Element => {
           fileName: `${process.env.NEXT_PUBLIC_AWS_S3_PDF_FOLDER}/${fileName}`,
           contentType: file?.type,
         }).unwrap();
-        if (response?.isSuccess && response?.uploadUrl) {
+        if (response?.success && response?.uploadUrl) {
           await axios.put(response.uploadUrl, file);
           technicalDocName = fileName;
         } else {
@@ -204,7 +204,7 @@ const BuyTender = ({ tenderId }: Props): JSX.Element => {
           fileName: `${process.env.NEXT_PUBLIC_AWS_S3_PDF_FOLDER}/${fileName}`,
           contentType: file?.type,
         }).unwrap();
-        if (response?.isSuccess && response?.uploadUrl) {
+        if (response?.success && response?.uploadUrl) {
           await axios.put(response.uploadUrl, file);
           financialDocName = fileName;
         } else {
@@ -231,7 +231,7 @@ const BuyTender = ({ tenderId }: Props): JSX.Element => {
     try {
       const createdBid = await createBid(formData).unwrap();
       console.log(createdBid);
-      if (createdBid.isSuccess === true)
+      if (createdBid.success === true)
         toast.success("Bid created successfully");
     } catch {
       toast.error("Failed to create bid");

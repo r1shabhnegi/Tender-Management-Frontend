@@ -14,7 +14,7 @@ const Tender = ({ params }: { params: Promise<{ id: string }> }) => {
 
   if (isLoading) return <PageLoading />;
 
-  if (isError || data.isSuccess === false) return <PageError />;
+  if (isError || data.success === false) return <PageError />;
 
   return (
     <div className='pt-[3.5rem]'>

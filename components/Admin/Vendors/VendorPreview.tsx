@@ -86,7 +86,7 @@ const VendorPreview: FC<Props> = ({ vendorId }) => {
 
   if (isLoading) return <PageLoading />;
 
-  if (isError || data?.isSuccess === false) {
+  if (isError || data?.success === false) {
     return <PageError />;
   }
 

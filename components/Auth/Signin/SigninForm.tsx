@@ -20,7 +20,7 @@ const SigninForm = () => {
     formState: { errors },
   } = useForm<ISigninInputs>();
 
-  function onSubmit(data: ISigninInputs) {
+  async function onSubmit(data: ISigninInputs) {
     loginUser(data);
   }
 

@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import CategoriesTable from "./CategoriesTable";
 import { toast } from "sonner";
 import AdminPagesWrapper from "../AdminPagesWrapper";
+import PageError from "@/components/Shared/PageError";
 
 const ManageCategories = () => {
   const [isCategoryDelete, setIsCategoryDelete] = useState<string[]>([]);
@@ -20,7 +21,7 @@ const ManageCategories = () => {
   async function handleDeleteCategories() {
     try {
       const deleted = await deleteCategories(isCategoryDelete).unwrap();
-      if (deleted.isSuccess) {
+      if (deleted.success) {
         toast.success("Categories Deleted Successfully");
         setIsCategoryDelete([]);
       }
@@ -36,11 +37,7 @@ const ManageCategories = () => {
     );
 
   if (isError) {
-    return (
-      <div className='w-full mt-40 flex items-center justify-center text-center'>
-        <h1 className='text-red-500 text-xl'>Data not available</h1>
-      </div>
-    );
+    return <PageError message='Error fetching categories' />;
   }
 
   return (

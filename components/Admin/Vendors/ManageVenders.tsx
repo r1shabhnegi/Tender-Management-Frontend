@@ -4,18 +4,15 @@ import { useGetVendorsQuery } from "@/Redux/vendor/vendorApi";
 import VendorsTable from "./VendorsTable";
 import PageLoading from "@/components/Shared/PageLoading";
 import AdminPagesWrapper from "../AdminPagesWrapper";
+import PageError from "@/components/Shared/PageError";
 
 const ManageVendors = () => {
   const { data, isLoading, isError } = useGetVendorsQuery({});
 
   if (isLoading) return <PageLoading />;
 
-  if (isError || data?.length === 0) {
-    return (
-      <div className='w-full mt-40 flex items-center justify-center text-center'>
-        <h1 className='text-red-500 text-xl'>Data not available</h1>
-      </div>
-    );
+  if (isError) {
+    return <PageError message='Error fetching vendors' />;
   }
 
   return (

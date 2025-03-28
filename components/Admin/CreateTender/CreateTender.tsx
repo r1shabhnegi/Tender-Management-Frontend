@@ -71,7 +71,7 @@ const validateTenderData = (data: {
     !tenderFeeDetails.documentFee ||
     !tenderFeeDetails.feePayableAt ||
     !tenderFeeDetails.EMD ||
-    !tenderFeeDetails.edmPayableAt ||
+    !tenderFeeDetails.emdPayableAt ||
     !tenderFeeDetails.tenderLocation ||
     !tenderFeeDetails.tenderValue
   ) {
@@ -159,7 +159,7 @@ const CreateTender = () => {
         documentFee: "",
         feePayableAt: "",
         EMD: "",
-        edmPayableAt: "",
+        emdPayableAt: "",
         tenderLocation: "",
         tenderValue: "",
       },
@@ -239,7 +239,7 @@ const CreateTender = () => {
               contentType: file?.type,
             }).unwrap();
 
-            if (response?.isSuccess && response?.uploadUrl) {
+            if (response?.success && response?.uploadUrl) {
               await axios.put(response.uploadUrl, file);
               console.log("fileName", fileName);
 
@@ -303,7 +303,7 @@ const CreateTender = () => {
 
       const res = await createTender(formData).unwrap();
       console.log("res", res);
-      if (res?.isSuccess) {
+      if (res?.success) {
         toast.success("Tender created successfully");
         methods.reset();
         setActive(0);

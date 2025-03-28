@@ -65,7 +65,7 @@ const VenderRegistration = () => {
               contentType: file?.type,
             }).unwrap();
 
-            if (response?.isSuccess && response?.uploadUrl) {
+            if (response?.success && response?.uploadUrl) {
               await axios.put(response.uploadUrl, file);
               panCardFileName = fileName;
             } else {
@@ -93,7 +93,7 @@ const VenderRegistration = () => {
               contentType: file?.type,
             }).unwrap();
 
-            if (response?.isSuccess && response?.uploadUrl) {
+            if (response?.success && response?.uploadUrl) {
               await axios.put(response.uploadUrl, file);
               registrationDocFileName = fileName;
             } else {
