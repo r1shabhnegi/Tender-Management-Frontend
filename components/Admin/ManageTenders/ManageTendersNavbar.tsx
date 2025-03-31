@@ -31,7 +31,7 @@ const ManageTendersNavbar: FC = () => {
   }
 
   return (
-    <div className='sticky bg-white  top-[3.8rem] z-[100] py-4 px-2 justify-between flex items-center'>
+    <div className='sticky border-b border-accent-color-2/10 max-w-[55rem] bg-white  top-[3.8rem] z-[100] py-4 px-2 justify-center flex items-center'>
       <div className='flex gap-4 items-center w-full'>
         <div className='flex items-center w-[30rem]'>
           <label

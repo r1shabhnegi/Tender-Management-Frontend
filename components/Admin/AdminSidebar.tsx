@@ -102,7 +102,7 @@ export function AdminSidebar() {
                       className=''>
                       <Link
                         href={elm.link}
-                        className='py-6 pl-10'>
+                        className='py-5 pl-10'>
                         <elm.icon
                           className='w-10'
                           size={40}

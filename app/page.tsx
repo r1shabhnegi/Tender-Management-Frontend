@@ -1,3 +1,4 @@
+import GeneralWrapper from "@/components/Shared/GeneralWrapper";
 import Home from "../components/Home/Home";
 import Heading from "@/components/Shared/Heading";
 
@@ -9,7 +10,9 @@ export default function Main() {
         description='A platform for venders to bid'
         keywords='Tender, Vender, Projects'
       />
-      <Home />
+      <GeneralWrapper>
+        <Home />
+      </GeneralWrapper>
     </div>
   );
 }

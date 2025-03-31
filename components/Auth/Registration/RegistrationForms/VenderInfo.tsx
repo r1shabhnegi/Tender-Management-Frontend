@@ -1,8 +1,7 @@
-import { formLabelStyle, inputStyle } from "@/app/Styles";
+import { formLabelStyle, inputStyle, primaryButtonStyle } from "@/app/Styles";
 import { IVenderRegistrationForm } from "@/app/Types/User-Types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { EyeClosedIcon, EyeIcon } from "lucide-react";
 import React, { FC, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -11,8 +10,6 @@ interface Props {
 }
 
 const VendorInfo: FC<Props> = ({ handleNextStep }) => {
-  const [showPW, setShowPW] = useState(true);
-
   const [showErrors, setShowErrors] = useState(false);
   const {
     register,
@@ -158,7 +155,7 @@ const VendorInfo: FC<Props> = ({ handleNextStep }) => {
           </div>
 
           <div className='flex gap-4'>
-            <div className='relative flex w-full flex-col'>
+            <div className='flex w-full flex-col'>
               <label
                 className={formLabelStyle}
                 htmlFor='password'>
@@ -166,7 +163,7 @@ const VendorInfo: FC<Props> = ({ handleNextStep }) => {
               </label>
               <Input
                 id='password'
-                type={!showPW ? "text" : "password"}
+                type='password'
                 className={inputStyle}
                 placeholder='Enter password here'
                 {...register("password", {
@@ -184,19 +181,6 @@ const VendorInfo: FC<Props> = ({ handleNextStep }) => {
                 })}
               />
               {showErrorMessage("password")}
-              <div className='absolute right-2 top-8'>
-                {showPW ? (
-                  <EyeClosedIcon
-                    className='w-6 h-6 cursor-pointer text-gray-500'
-                    onClick={() => setShowPW(false)}
-                  />
-                ) : (
-                  <EyeIcon
-                    className='w-6 h-6 cursor-pointer text-blue-500'
-                    onClick={() => setShowPW(true)}
-                  />
-                )}
-              </div>
             </div>
             <div className=' flex w-full flex-col'>
               <label
@@ -222,7 +206,7 @@ const VendorInfo: FC<Props> = ({ handleNextStep }) => {
           <div className='flex justify-end'>
             <Button
               type='button'
-              className='bg-blue-600 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300'
+              className={primaryButtonStyle}
               onClick={handleNext}>
               Submit & Continue
             </Button>

@@ -23,7 +23,6 @@ const CategoriesTable: FC<Props> = ({
   isCategoryDelete,
   setIsCategoryDelete,
 }) => {
-  console.log(data);
   return (
     <div className='bg-card-color shadow p-5 rounded-lg'>
       <Table>
@@ -40,7 +39,7 @@ const CategoriesTable: FC<Props> = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.categories.length === 0 ? (
+          {data?.categories?.length === 0 ? (
             <TableRow>
               <TableCell
                 colSpan={8}
@@ -49,7 +48,7 @@ const CategoriesTable: FC<Props> = ({
               </TableCell>
             </TableRow>
           ) : (
-            data.categories.map((category) => (
+            data?.categories?.map((category) => (
               <TableRow key={category.id}>
                 <TableCell>
                   <Checkbox

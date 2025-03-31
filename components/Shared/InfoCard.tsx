@@ -23,8 +23,7 @@ const InfoCard: FC<InfoCardProps> = ({
   backButtonLink,
 }) => {
   return (
-    <div
-      className={`bg-card-color border border-blue-50 rounded-xl p-6 ${className}`}>
+    <div className={`bg-card-color/50 border-none rounded-xl p-6 ${className}`}>
       <div className='flex justify-between mb-4 pb-2 border-b items-center'>
         <div className='flex items-center gap-3'>
           <h2 className='text-lg text-gray-900 font-semibold '>{title}</h2>

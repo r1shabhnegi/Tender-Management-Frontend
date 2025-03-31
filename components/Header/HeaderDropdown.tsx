@@ -5,13 +5,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar } from "../ui/avatar";
 import { useDispatch } from "react-redux";
 import { useLogoutQuery } from "@/Redux/auth/authApi";
 import { setLogout } from "@/Redux/auth/authSlice";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { LogOut } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 
 const HeaderDropdown = () => {
   const [isLogout, setIsLogout] = useState(true);
@@ -24,8 +24,8 @@ const HeaderDropdown = () => {
       if ("success" in data) {
         if (data.success === true) {
           dispatch(setLogout());
-          toast.success("Logout Successful!");
           router.push("/");
+          toast.success("Logout Successful!");
         }
       }
     }
@@ -34,9 +34,8 @@ const HeaderDropdown = () => {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger className='z-[400]'>
-        <Avatar className='size-9'>
-          <AvatarImage src='https://github.com/shadcn.png' />
-          <AvatarFallback>CN</AvatarFallback>
+        <Avatar className='bg-[#F8F8F8] flex items-center justify-center size-9'>
+          <User className='text-accent-color-2 size-5' />
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent

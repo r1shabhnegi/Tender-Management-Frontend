@@ -30,7 +30,7 @@ export default function RootLayout({
         /> */}
       </head>
       <body
-        className={`${robotoMono.className} antialiased bg-background min-h-svh`}>
+        className={`${robotoMono.className} antialiased bg-white min-h-svh`}>
         <RootProvider>
           <PersistentUser>
             <Header />

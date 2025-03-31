@@ -33,6 +33,46 @@ const vendorApi = api.injectEndpoints({
       }),
       invalidatesTags: ["get_vendor_details", "get_vendors"],
     }),
+
+    // Get vendor dashboard statistics
+    getVendorDashboardStats: builder.query({
+      query: () => ({
+        url: "/vendor/dashboard/stats",
+        method: "GET",
+      }),
+    }),
+
+    // Get purchased tenders
+    getVendorPurchasedTenders: builder.query({
+      query: () => ({
+        url: "/vendor/dashboard/purchased-tenders",
+        method: "GET",
+      }),
+    }),
+
+    // Get qualified tenders
+    getVendorQualifiedTenders: builder.query({
+      query: () => ({
+        url: "/vendor/dashboard/qualified-tenders",
+        method: "GET",
+      }),
+    }),
+
+    // Get participated tenders
+    getVendorParticipatedTenders: builder.query({
+      query: () => ({
+        url: "/vendor/dashboard/participated-tenders",
+        method: "GET",
+      }),
+    }),
+
+    // Get vendor bids
+    getVendorBids: builder.query({
+      query: () => ({
+        url: "/vendor/dashboard/bids",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -41,4 +81,9 @@ export const {
   useGetVendorDetailsQuery,
   useUploadVendorByAdminMutation,
   useGetCategoryVendorsQuery,
+  useGetVendorDashboardStatsQuery,
+  useGetVendorPurchasedTendersQuery,
+  useGetVendorQualifiedTendersQuery,
+  useGetVendorParticipatedTendersQuery,
+  useGetVendorBidsQuery,
 } = vendorApi;

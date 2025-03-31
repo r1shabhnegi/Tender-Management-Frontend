@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import {
-  Building2,
   Briefcase,
   MapPin,
   Calendar,
@@ -9,28 +8,77 @@ import {
   Tag,
   FileCode2,
   IndianRupee,
+  ArrowRight,
 } from "lucide-react";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
 import { capitalizeFirstLetter } from "@/lib/helper";
 import { Button } from "@/components/ui/button";
-import { IconRight } from "react-day-picker";
 import { ITenderCard } from "@/app/Types/Tender-Types";
 
 const TenderCard: FC<{ tender: ITenderCard }> = ({ tender }) => {
   const router = useRouter();
 
+  // Determine tender status based on bid end date
+  // const getBidStatus = () => {
+  //   const isExpired =
+  //     isPast(tender?.bidEndDate) && !isToday(tender?.bidEndDate);
+  //   const isEnding = isToday(tender?.bidEndDate);
+
+  //   if (isExpired) {
+  //     return {
+  //       label: "Closed",
+  //       icon: <AlertCircle className='w-3 h-3 mr-1' />,
+  //       className: "bg-red-100 text-red-700",
+  //     };
+  //   } else if (isEnding) {
+  //     return {
+  //       label: "Ending Today",
+  //       icon: <Clock className='w-3 h-3 mr-1' />,
+  //       className: "bg-amber-100 text-amber-700",
+  //     };
+  //   } else {
+  //     return {
+  //       label: "Active",
+  //       icon: <CheckCircle2 className='w-3 h-3 mr-1' />,
+  //       className: "bg-emerald-100 text-emerald-700",
+  //     };
+  //   }
+  // };
+
+  // const status = getBidStatus();
+
   return (
-    <div className='relative bg-card-color  rounded-xl border  max-w-[55rem] p-6 '>
-      <div className='flex gap-6'>
+    <div
+      className='relative transition-all duration-300 border-b-2 border-accent-color-2/10 rounded-x max-w-[60rem] overflow-hidden pb-4'
+      style={
+        {
+          // boxShadow: "0px 0px 8px 0px rgba(0, 0, 0, 0.1)",
+        }
+      }>
+      {/* <div className=' py-1 rounded-tl-xl rounded-tr-xl flex justify-between items-center px-4'>
+        <div className='flex items-center'>
+          <span className='font-medium text-black text-sm mr-1.5'>
+            Tender {tender.type}
+          </span>
+          <span className='text-black text-sm'>#{tender.tenderNumber}</span>
+        </div>
+        <div
+          className={`${status.className} rounded-full px-3 py-1 text-xs flex items-center`}>
+          {status.icon}
+          <span className='font-medium'>{status.label}</span>
+        </div>
+      </div> */}
+
+      <div className='flex  p-5'>
         <div className='flex-1 space-y-4'>
           <div>
-            <h3 className='text-xl font-semibold text-gray-900 line-clamp-2'>
+            <h3 className='text-[1.30rem] font-semibold text-text-color-1 line-clamp-2 leading-tight'>
               {tender.title}
             </h3>
-            <div className='flex items-center mt-2 text-gray-700'>
-              <Building2 className='w-4 h-4 mr-2' />
-              <span className='text-sm'>
+            <div className='flex items-center mt-2 text-gray-600'>
+              {/* <Building2 className='w-4 h-4 mr-2' /> */}
+              <span className='text-[0.85rem]'>
                 The Energy and Resources Institute (TERI)
               </span>
             </div>
@@ -38,74 +86,99 @@ const TenderCard: FC<{ tender: ITenderCard }> = ({ tender }) => {
 
           {/* Tags Section */}
           <div className='flex flex-wrap gap-2'>
-            <span className='px-3 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-[0.5rem]'>
+            <span className='px-3 py-1 text-xs font-medium bg-primary-1/5 text-accent-color-2 rounded-[0.4rem]'>
               {capitalizeFirstLetter(tender.type)}
             </span>
-            <span className='px-3 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-[0.5rem]'>
+            <span className='px-3 py-1 text-xs font-medium bg-primary-1/5 text-accent-color-2 rounded-[0.4rem]'>
               {capitalizeFirstLetter(tender.category)}
             </span>
           </div>
 
           {/* Details Grid */}
           <div className='grid grid-cols-2 gap-4'>
-            <div className='flex items-center text-gray-700'>
-              <Briefcase className='w-4 h-4 mr-2' />
-              <span className='text-sm'>{tender.department}</span>
+            <div className='flex items-center text-gray-600'>
+              <div className='p-2 mr-3 bg-primary-1/5 flex items-center justify-center rounded-full'>
+                <Briefcase className='text-gray-600 size-4' />
+              </div>
+              <div className='flex flex-col'>
+                <span className='text-xs text-text-color-2'>Department</span>
+                <span className='text-[0.85rem] font-medium text-text-color-1'>
+                  {tender.department}
+                </span>
+              </div>
             </div>
-            <div className='flex items-center text-gray-700'>
-              <MapPin className='w-4 h-4 mr-2' />
-              <span className='text-sm'>
-                {capitalizeFirstLetter(tender.location)}
-              </span>
+            <div className='flex items-center text-gray-600'>
+              <div className='p-2 mr-3 bg-primary-1/5 flex items-center justify-center rounded-full'>
+                <MapPin className='text-gray-600 size-4' />
+              </div>
+              <div className='flex flex-col'>
+                <span className='text-xs text-text-color-2'>Location</span>
+                <span className='text-[0.85rem] font-medium text-text-color-1'>
+                  {capitalizeFirstLetter(tender.location)}
+                </span>
+              </div>
             </div>
-            <div className='flex items-center text-gray-700'>
-              <Tag className='w-4 h-4 mr-2' />
-              <span className='text-sm'>
-                {capitalizeFirstLetter(tender.scope)}
-              </span>
+            <div className='flex items-center text-gray-600'>
+              <div className='p-2 mr-3 bg-primary-1/5 flex items-center justify-center rounded-full'>
+                <Tag className='text-gray-600 size-4' />
+              </div>
+              <div className='flex flex-col'>
+                <span className='text-xs text-text-color-2'>Scope</span>
+                <span className='text-[0.85rem] font-medium text-text-color-1'>
+                  {capitalizeFirstLetter(tender.scope)}
+                </span>
+              </div>
             </div>
-            <div className='flex items-center text-gray-700'>
-              <FileCode2 className='w-4 h-4 mr-2' />
-              <span className='text-sm'>#TN{tender.tenderNumber}</span>
+            <div className='flex items-center text-gray-600'>
+              <div className='p-2 mr-3 bg-primary-1/5 flex items-center justify-center rounded-full'>
+                <FileCode2 className='text-gray-600 size-4' />
+              </div>
+              <div className='flex flex-col'>
+                <span className='text-xs text-text-color-2'>Tender Number</span>
+                <span className='text-[0.85rem] font-medium text-text-color-1'>
+                  #TN{tender.tenderNumber}
+                </span>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Right Section */}
-        <div className='w-64 flex flex-col justify-between border-l pl-6'>
+        <div className='w-64 flex flex-col justify-between border-l border-gray-200 pl-5'>
           {/* Important Information */}
-          <div className='space-y-4'>
-            <div className='flex items-center text-orange-700'>
+          <div className='space-y-2'>
+            <div className='flex items-center text-gray-700 px-3 py-2 rounded-lg'>
               <Calendar className='w-4 h-4 mr-2' />
-              <span className='text-sm font-medium'>
+
+              <span className='text-[0.85rem] font-medium'>
                 Bid Ends:
-                {format(tender?.bidEndDate, "PPP")}
+                {format(tender?.bidEndDate, "dd MMM yyyy")}
               </span>
             </div>
-            <div className='space-y-2'>
-              <div className='flex items-center text-gray-700'>
-                <FileText className='w-4 h-4 mr-2' />
-                <span className='text-sm flex items-center'>
-                  Doc Fee: <IndianRupee className='w-3 h-3 ml-2' />
-                  {tender.documentFee}
-                </span>
-              </div>
-              <div className='flex items-center text-gray-700'>
-                <CreditCard className='w-4 h-4 mr-2' />
-                <span className='text-sm flex items-center'>
-                  EMD: <IndianRupee className='w-3 h-3 ml-2' />
-                  {tender.emd}
-                </span>
-              </div>
+
+            <div className='flex items-center text-gray-700 px-3 py-2 rounded-lg'>
+              <FileText className='w-4 h-4 mr-2' />
+              <span className='text-[0.85rem] flex items-center'>
+                Doc Fee: <IndianRupee className='w-3 h-3 ml-1.5' />
+                {tender.documentFee}
+              </span>
+            </div>
+
+            <div className='flex items-center text-gray-700 px-3 py-1.5 rounded-lg'>
+              <CreditCard className='w-4 h-4 mr-2' />
+              <span className='text-[0.85rem] flex items-center'>
+                EMD: <IndianRupee className='w-3 h-3 ml-1.5' />
+                {tender.emd}
+              </span>
             </div>
           </div>
 
           {/* Action Button */}
           <Button
-            className='mt-4  bg-blue-600 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300'
-            onClick={() => router.push(`/tender/${tender.id}`)}>
-            View Details
-            <IconRight className='size-2 p-0.5' />
+            onClick={() => router.push(`/tender/${tender.id}`)}
+            className='w-full bg-gradient-to-r from-accent-color-2 to-accent-color-2/80 hover:from-accent-color-2/50 hover:to-accent-color-2 text-white py-2.5 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-sm group'>
+            <span>View Details</span>
+            <ArrowRight className='size-4 group-hover:translate-x-0.5 transition-transform' />
           </Button>
         </div>
       </div>
