@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./auth/authSlice";
 import { api } from "./api";
-import { authApi } from "./auth/authApi";
 import venderRegistrationSlice from "./vendor/venderRegistrationSlice";
 import venderDetailsPageSlice from "./vendor/venderDetailsPageSlice";
 import tenderSlice from "./tender/tenderSlice";

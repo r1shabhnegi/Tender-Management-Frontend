@@ -50,9 +50,8 @@ const VendorBidsPage = () => {
       status: "Submitted",
     },
   ];
-
   // Function to determine status badge color
-  const getStatusBadgeClass = (status) => {
+  const getStatusBadgeClass = (status: string) => {
     switch (status) {
       case "Qualified":
         return "bg-green-100 text-green-800 border-green-200";
