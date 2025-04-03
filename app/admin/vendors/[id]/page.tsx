@@ -1,6 +1,6 @@
 import Heading from "@/components/Shared/Heading";
 import React, { use } from "react";
-import VendorPreview from "@/components/Admin/Vendors/VendorPreview";
+import VendorPreview from "@/components/Vendor/For-Admin/VendorPreview";
 
 const Vendor = ({ params }: { params: Promise<{ id: string }> }) => {
   const resolvedParams = use(params);

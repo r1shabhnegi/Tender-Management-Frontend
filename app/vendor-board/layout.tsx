@@ -1,5 +1,5 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { VendorSidebar } from "@/components/Vendor/VendorSidebar";
+import { VendorSidebar } from "@/components/Vendor/For-Vendor/VendorSidebar";
 import Protected from "@/components/Auth/Protected";
 
 export default function DashboardLayout({

@@ -35,7 +35,7 @@ const HeaderDropdown = () => {
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger className='z-[400]'>
         <Avatar className='bg-[#F8F8F8] flex items-center justify-center size-9'>
-          <User className='text-accent-color-2 size-5' />
+          <User className='text-accent size-5' />
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent

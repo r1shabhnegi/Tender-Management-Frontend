@@ -58,6 +58,16 @@ export const api = createApi({
     "get_vendors",
     "get_vendor_details",
     "get_vendor_categories",
+    "bids",
   ],
-  endpoints: () => ({}),
+  endpoints: (builder) => ({
+    getS3File: builder.query({
+      query: (fileName: string) => ({
+        url: `/s3-files/file-url?fileName=${fileName}`,
+        method: "GET",
+      }),
+    }),
+  }),
 });
+
+export const { useGetS3FileQuery } = api;

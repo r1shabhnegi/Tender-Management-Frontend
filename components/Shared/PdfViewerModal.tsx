@@ -68,7 +68,7 @@ const PdfViewerModal: FC<Props> = ({ file, setIsPdfModal }) => {
 
   return (
     <div
-      className='fixed w-full h-full top-0 left-0 z-[99] flex justify-center items-center transition ease-in-out duration-[900ms] bg-[rgba(0,0,0,0.54)]'
+      className='fixed w-full h-full top-0 left-0 z-[800] flex justify-center items-center transition ease-in-out duration-[900ms] bg-[rgba(0,0,0,0.54)]'
       onClick={() => setIsPdfModal(false)}>
       <div
         className='relative max-w-[60%] overflow-y-auto h-[93vh] w-full bg-white'

@@ -20,7 +20,8 @@ import {
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { inputStyle } from "@/app/Styles";
+import { borderStyle, inputStyle } from "@/app/Styles";
+import { cn } from "@/lib/utils";
 
 const HomeSidebar = () => {
   const popularCategories = [
@@ -54,13 +55,7 @@ const HomeSidebar = () => {
 
   return (
     <div className='w-full md:w-80 space-y-6 order-first md:order-last'>
-      <div
-        className='rounded-2xl border-2 border-primary-1/10  overflow-hidden'
-        style={
-          {
-            // boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
-          }
-        }>
+      <div className={cn("rounded-2xl border overflow-hidden", borderStyle)}>
         <div className=' px-5 py-5 text-gray-800'>
           <h3 className='font-semibold text-base mb-1'>Find Tenders</h3>
           <p className='text-gray-600 text-xs'>
@@ -89,7 +84,7 @@ const HomeSidebar = () => {
               </div>
               <Link
                 href='/categories'
-                className='text-xs text-accent-color-2 flex items-center hover:underline'>
+                className='text-xs text-accent flex items-center hover:underline'>
                 View all
                 <ArrowUpRight className='h-3 w-3 ml-0.5' />
               </Link>
@@ -101,10 +96,10 @@ const HomeSidebar = () => {
                   key={idx}
                   href={`/categories/${category.name.toLowerCase()}`}
                   className='flex items-center justify-between bg-gray-50 hover:bg-blue-50 p-2 rounded-lg group transition-colors border border-gray-100 hover:border-blue-100'>
-                  <span className='text-xs text-gray-700 group-hover:text-primary-1 font-medium'>
+                  <span className='text-xs text-gray-700 group-hover:text-primary font-medium'>
                     {category.name}
                   </span>
-                  <Badge className='bg-white text-accent-color-2 text-[10px] px-1.5 font-medium border border-blue-100 shadow-sm'>
+                  <Badge className='bg-white text-accent text-[10px] px-1.5 font-medium border border-blue-100 shadow-sm'>
                     {category.count}
                   </Badge>
                 </Link>
@@ -115,16 +110,10 @@ const HomeSidebar = () => {
       </div>
 
       {/* Upcoming Events */}
-      <div
-        className=' rounded-2xl border-2 border-primary-1/10  overflow-hidden'
-        style={
-          {
-            // boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
-          }
-        }>
+      <div className={cn("rounded-2xl border overflow-hidden", borderStyle)}>
         <div className='flex items-center justify-between px-5 py-4 border-b border-gray-100'>
           <div className='flex items-center'>
-            <div className='bg-primary-1/5 p-1.5 rounded-md mr-2.5'>
+            <div className='bg-primary/5 p-1.5 rounded-md mr-2.5'>
               <Calendar className='h-4 w-4 text-gray-600' />
             </div>
             <h3 className='font-semibold text-gray-800 text-sm'>
@@ -133,7 +122,7 @@ const HomeSidebar = () => {
           </div>
           <Link
             href='/events'
-            className='text-xs text-accent-color-2 hover:underline flex items-center'>
+            className='text-xs text-accent hover:underline flex items-center'>
             View all
             <ChevronRight className='h-3 w-3 ml-0.5' />
           </Link>
@@ -144,9 +133,9 @@ const HomeSidebar = () => {
             <div
               key={idx}
               className='flex  pl-3 hover:bg-blue-50/30 p-2 -ml-2 rounded-r-lg transition-colors cursor-pointer'>
-              {/* <div className='w-10 h-10 rounded-lg bg-primary-1/5 flex items-center justify-center flex-shrink-0 mr-3'>
-                <Calendar className='h-5 w-5 text-accent-color-2' />
-              </div> */}
+              <div className='w-10 h-10 rounded-lg bg-primary/5 flex items-center justify-center flex-shrink-0 mr-3'>
+                <Calendar className='h-5 w-5 text-accent' />
+              </div>
               <div>
                 <h4 className='text-sm font-medium text-gray-800'>
                   {event.title}
@@ -164,16 +153,10 @@ const HomeSidebar = () => {
       </div>
 
       {/* Quick Resources */}
-      <div
-        className=' rounded-2xl border-2 border-primary-1/10  overflow-hidden'
-        style={
-          {
-            // boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
-          }
-        }>
+      <div className={cn("rounded-2xl border overflow-hidden", borderStyle)}>
         <div className='flex items-center justify-between px-5 py-4 border-b border-gray-100'>
           <div className='flex items-center'>
-            <div className='bg-primary-1/5 p-1.5 rounded-md mr-2.5'>
+            <div className='bg-primary/5 p-1.5 rounded-md mr-2.5'>
               <Book className='h-4 w-4 text-gray-600' />
             </div>
             <h3 className='font-semibold text-gray-800 text-sm'>
@@ -221,16 +204,10 @@ const HomeSidebar = () => {
         </div>
       </div>
       {/* Trending Tenders */}
-      <div
-        className=' rounded-2xl border-2 border-primary-1/10  overflow-hidden'
-        style={
-          {
-            // boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
-          }
-        }>
+      <div className={cn("rounded-2xl border overflow-hidden", borderStyle)}>
         <div className='flex items-center justify-between px-5 py-4 border-b border-gray-100'>
           <div className='flex items-center'>
-            <div className='bg-primary-1/5 p-1.5 rounded-md mr-2.5'>
+            <div className='bg-primary/5 p-1.5 rounded-md mr-2.5'>
               <TrendingUp className='h-4 w-4 text-gray-600' />
             </div>
             <h3 className='font-semibold text-gray-800 text-sm'>
@@ -286,7 +263,7 @@ const HomeSidebar = () => {
         <div className='px-5 py-3 bg-gray-50 border-t border-gray-100'>
           <Link
             href='/trending'
-            className='flex items-center justify-center text-sm text-accent-color-2 hover:text-blue-700 font-medium'>
+            className='flex items-center justify-center text-sm text-accent hover:text-blue-700 font-medium'>
             View all tenders
             <ChevronRight className='h-4 w-4 ml-1' />
           </Link>
@@ -294,17 +271,11 @@ const HomeSidebar = () => {
       </div>
 
       {/* FAQ Card */}
-      <div
-        className=' rounded-2xl border-2 border-primary-1/10    overflow-hidden'
-        style={
-          {
-            // boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
-          }
-        }>
+      <div className={cn("rounded-2xl border overflow-hidden", borderStyle)}>
         <div className='flex items-center justify-between px-5 py-4 border-b border-gray-100'>
           <div className='flex items-center'>
-            <div className='bg-primary-1/5 p-1.5 rounded-md mr-2.5'>
-              <HelpCircle className='h-4 w-4 text-accent-color-2' />
+            <div className='bg-primary/5 p-1.5 rounded-md mr-2.5'>
+              <HelpCircle className='h-4 w-4 text-accent' />
             </div>
             <h3 className='font-semibold text-gray-800 text-sm'>
               Frequently Asked Questions
@@ -332,7 +303,7 @@ const HomeSidebar = () => {
         <div className='px-5 py-3 bg-gray-50 border-t border-gray-100'>
           <Link
             href='/faq'
-            className='flex items-center justify-center text-sm text-accent-color-2 hover:text-blue-700 font-medium'>
+            className='flex items-center justify-center text-sm text-accent hover:text-blue-700 font-medium'>
             View all FAQs
             <ChevronRight className='h-4 w-4 ml-1' />
           </Link>
@@ -340,17 +311,11 @@ const HomeSidebar = () => {
       </div>
 
       {/* Support/Help Card */}
-      <div
-        className=' rounded-2xl border-2 border-primary-1/10  overflow-hidden'
-        style={
-          {
-            // boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
-          }
-        }>
+      <div className={cn("rounded-2xl border overflow-hidden", borderStyle)}>
         <div className='flex items-center justify-between px-5 py-4 border-b border-gray-100'>
           <div className='flex items-center'>
-            <div className='bg-primary-1/5 p-1.5 rounded-md mr-2.5'>
-              <MessageSquare className='h-4 w-4 text-accent-color-2' />
+            <div className='bg-primary/5 p-1.5 rounded-md mr-2.5'>
+              <MessageSquare className='h-4 w-4 text-accent' />
             </div>
             <h3 className='font-semibold text-gray-800 text-sm'>Need Help?</h3>
           </div>
@@ -389,12 +354,9 @@ const HomeSidebar = () => {
 
       {/* Newsletter Box */}
       <div
-        className='bg-gradient-to-br from-accent-color-2 to-accent-color-2/90 rounded-2xl border-2 border-primary-1/10  overflow-hidden p-5 text-white'
-        style={
-          {
-            // boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
-          }
-        }>
+        className={cn(
+          "bg-gradient-to-br from-accent to-accent/90 rounded-2xl overflow-hidden p-5 text-white"
+        )}>
         <div className='flex items-start mb-3'>
           <div className='w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center mr-3 flex-shrink-0'>
             <Bell className='h-5 w-5 text-white' />

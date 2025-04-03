@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/Redux/store";
 import { setAgreementForm } from "@/Redux/vendor/venderRegistrationSlice";
 import { useRouter } from "next/navigation";
+import { AlertTriangle, FileCheck, Info, Scroll } from "lucide-react";
 
 const Registration = () => {
   const [isAgreementFormErr, setIsAgreementFormErr] = useState({
@@ -79,109 +80,167 @@ const Registration = () => {
   };
 
   return (
-    <div className='pt-[3.8rem]'>
+    <div className='min-h-screen pt-[3.8rem] bg-gray-50'>
       <Heading
         title='TERI - Tender Management'
-        description='A platform for venders to bid'
-        keywords='Tender, Vender, Projects'
+        description='A platform for vendors to bid'
+        keywords='Tender, Vendor, Projects'
       />
 
-      <div className='flex justify-center items-center'>
-        <div className='mt-8 max-w-[65rem] w-full'>
-          <div className='flex justify-center px-10 pt-6 pb-8 shadow-md rounded-xl bg-card-color'>
-            <div className='flex justify-center flex-col'>
-              <div className='mx-5 mt-4'>
-                <h1 className='font-medium text-gray-900 text-center text-2xl'>
-                  Vender Registration
-                </h1>
+      <div className='container mx-auto px-6 py-12 max-w-4xl'>
+        {/* Header */}
+        <div className='bg-white shadow-sm border-b mb-8 rounded-xl'>
+          <div className='px-6 py-8'>
+            <div className='flex items-center gap-3 mb-4 justify-center'>
+              <div className='bg-primary/10 rounded-full p-3'>
+                <Scroll className='h-6 w-6 text-primary' />
               </div>
-              <div className='rounded-md my-3'>
-                <h2 className=' text-lg mb-2 ml-2.5 text-gray-900'>
-                  Agreement
-                </h2>
-                <p className='bg-white text-gray-700 rounded-md p-4'>
-                  Please read the agreement carefully. By filling this form, you
-                  agree to accept the terms and conditions.On successful
-                  registration completion, you&apos;ll get the copy of agreement
-                  to your registered email
-                </p>
+            </div>
+            <h1 className='text-3xl font-bold text-gray-900 text-center'>
+              Vendor Registration
+            </h1>
+            <p className='text-gray-600 mt-2 text-center max-w-xl mx-auto'>
+              Before proceeding with registration, please review and accept our
+              terms and conditions.
+            </p>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className='bg-white rounded-xl shadow-sm border border-gray-100'>
+          <div className='p-6'>
+            <div className='space-y-6'>
+              <div className='bg-blue-50 p-4 rounded-lg border border-blue-200 flex items-start gap-3'>
+                <Info
+                  className='text-blue-600 shrink-0 mt-0.5'
+                  size={18}
+                />
+                <div className='text-sm text-gray-700'>
+                  <p className='font-medium text-blue-800 mb-1'>
+                    Important Information
+                  </p>
+                  <p>
+                    Please read the agreement carefully. By accepting these
+                    terms, you agree to comply with all platform policies. After
+                    successful registration, you&apos;ll receive a copy of this
+                    agreement via email.
+                  </p>
+                </div>
               </div>
 
-              <div className=' my-4'>
-                <h2 className='text-lg mb-2 ml-2.5 text-gray-900'>
-                  Terms of Services
-                </h2>
+              <div className='space-y-2'>
+                <div className='flex items-center gap-2 mb-1'>
+                  <FileCheck
+                    size={18}
+                    className='text-primary'
+                  />
+                  <h2 className='text-lg font-semibold text-gray-900'>
+                    Terms of Service
+                  </h2>
+                </div>
                 <Textarea
-                  className='bg-white text-base rounded-md p-4 text-gray-700 '
+                  className='bg-gray-50 text-base rounded-md p-4 text-gray-700 border-gray-200 min-h-[200px]'
                   readOnly={true}
                   defaultValue={
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec nulla lobortis, semper quam quis, viverra lorem. In porttitor blandit tellus sit amet cursus. Integer iaculis arcu nulla, sit amet mollis orci pellentesque sit amet. Duis velit lacus, tempor eu sollicitudin vitae, consectetur et enim. Suspendisse euismod pellentesque lacus, bibendum commodo ipsum luctus nec. Proin tortor lorem, tincidunt nec odio eu, molestie consequat lectus. Integer cursus justo sed augue semper suscipit. Aenean finibus libero quis fermentum rhoncus. Nullam quis massa a nisl efficitur blandit. Duis malesuada volutpat vulputate. Suspendisse potenti. In interdum faucibus ipsum interdum mattis. Pellentesque fringilla mollis turpis in rhoncus. Quisque consectetur enim augue, sed blandit libero ullamcorper vel. Vivamus et diam ullamcorper, imperdiet dui interdum, egestas justo. Pellentesque id justo finibus, volutpat tortor id, lacinia dolor. Aenean congue velit ac leo euismod, nec convallis risus cursus. Aenean faucibus sem vitae tortor elementum, nec feugiat enim eleifend. Ut feugiat, ligula a aliquam bibendum, neque nibh condimentum ante, sed tincidunt nibh mauris ut purus. Duis fringilla cursus mauris, non pretium leo laoreet ut. Integer ut vestibulum sapien. Sed pharetra augue at eleifend mollis. Fusce ultricies porta mi, non lobortis metus interdum ultricies."
                   }
-                  rows={4}
                 />
               </div>
-              <div className='my-3 flex flex-col gap-2 p-4'>
-                <div className='flex items-center'>
-                  <Checkbox
-                    id='term-service'
-                    className='mr-2 data-[state=checked]:bg-blue-600 border-blue-400'
-                    checked={isTermServiceChecked}
-                    onCheckedChange={(val) =>
-                      setIsTermServiceChecked(val as boolean)
-                    }
-                  />
-                  <label htmlFor='term-service'>
-                    I agree to Terms of Service
-                  </label>
-                  {isAgreementFormErr.termErr && (
-                    <p className='text-red-500 text-[0.85rem] ml-4'>
-                      Please check the box before submit
-                    </p>
-                  )}
-                </div>
-                <div className='flex items-center'>
-                  <Checkbox
-                    id='accept-privacy'
-                    className='mr-2 data-[state=checked]:bg-blue-600 border-blue-400'
-                    checked={isAcceptPrivacyChecked}
-                    onCheckedChange={(val) =>
-                      setIsAcceptPrivacyChecked(val as boolean)
-                    }
-                  />
-                  <label htmlFor='accept-privacy'>
-                    I read and accept Privacy and Data Sharing Policies
-                  </label>
-                  {isAgreementFormErr.accPrivacyErr && (
-                    <p className='text-red-500 text-[0.85rem] ml-4'>
-                      Please check the box before submit
-                    </p>
-                  )}
-                </div>
-                <div className='flex items-center'>
-                  <Checkbox
-                    id='business-ethics'
-                    className='mr-2 data-[state=checked]:bg-blue-600 border-blue-400'
-                    checked={isBusinessEthicsChecked}
-                    onCheckedChange={(val) =>
-                      setIsBusinessEthicsChecked(val as boolean)
-                    }
-                  />
-                  <label htmlFor='business-ethics'>
-                    I read and promise to follow Business Ethics and Codes
-                  </label>
-                  {isAgreementFormErr.businessEthicsErr && (
-                    <p className='text-red-500 text-[0.85rem] ml-4'>
-                      Please check the box before submit
-                    </p>
-                  )}
+
+              <div className='space-y-4 bg-gray-50 p-5 rounded-lg border border-gray-200'>
+                <h3 className='font-medium text-gray-800 mb-3'>
+                  Required Agreements
+                </h3>
+
+                <div className='space-y-4'>
+                  <div className='flex items-start space-x-3'>
+                    <Checkbox
+                      id='term-service'
+                      className='mt-0.5 data-[state=checked]:bg-primary data-[state=checked]:border-primary'
+                      checked={isTermServiceChecked}
+                      onCheckedChange={(val) =>
+                        setIsTermServiceChecked(val as boolean)
+                      }
+                    />
+                    <div className='space-y-1'>
+                      <label
+                        htmlFor='term-service'
+                        className='font-medium text-gray-700 cursor-pointer'>
+                        I agree to Terms of Service
+                      </label>
+                      {isAgreementFormErr.termErr && (
+                        <p className='text-red-600 text-[0.85rem] flex items-center gap-1.5'>
+                          <AlertTriangle
+                            size={14}
+                            className='text-red-600'
+                          />
+                          This agreement is required to proceed
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className='flex items-start space-x-3'>
+                    <Checkbox
+                      id='accept-privacy'
+                      className='mt-0.5 data-[state=checked]:bg-primary data-[state=checked]:border-primary'
+                      checked={isAcceptPrivacyChecked}
+                      onCheckedChange={(val) =>
+                        setIsAcceptPrivacyChecked(val as boolean)
+                      }
+                    />
+                    <div className='space-y-1'>
+                      <label
+                        htmlFor='accept-privacy'
+                        className='font-medium text-gray-700 cursor-pointer'>
+                        I read and accept Privacy and Data Sharing Policies
+                      </label>
+                      {isAgreementFormErr.accPrivacyErr && (
+                        <p className='text-red-600 text-[0.85rem] flex items-center gap-1.5'>
+                          <AlertTriangle
+                            size={14}
+                            className='text-red-600'
+                          />
+                          This agreement is required to proceed
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className='flex items-start space-x-3'>
+                    <Checkbox
+                      id='business-ethics'
+                      className='mt-0.5 data-[state=checked]:bg-primary data-[state=checked]:border-primary'
+                      checked={isBusinessEthicsChecked}
+                      onCheckedChange={(val) =>
+                        setIsBusinessEthicsChecked(val as boolean)
+                      }
+                    />
+                    <div className='space-y-1'>
+                      <label
+                        htmlFor='business-ethics'
+                        className='font-medium text-gray-700 cursor-pointer'>
+                        I read and promise to follow Business Ethics and Codes
+                      </label>
+                      {isAgreementFormErr.businessEthicsErr && (
+                        <p className='text-red-600 text-[0.85rem] flex items-center gap-1.5'>
+                          <AlertTriangle
+                            size={14}
+                            className='text-red-600'
+                          />
+                          This agreement is required to proceed
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className='flex justify-end'>
+              <div className='flex justify-end pt-2'>
                 <Button
                   onClick={handleAgreementForm}
-                  className='mt-6 bg-blue-600 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300'>
-                  Submit & Continue
+                  className='bg-primary hover:bg-primary/90 text-white px-6 h-10'>
+                  Continue to Registration
                 </Button>
               </div>
             </div>

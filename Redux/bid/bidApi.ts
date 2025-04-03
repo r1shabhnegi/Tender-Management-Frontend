@@ -23,6 +23,15 @@ const bidApi = api.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    updateBidScore: builder.mutation({
+      query: ({ bidId, technicalScore, financialScore }) => ({
+        url: `/bid/update-score/${bidId}`,
+        method: "PATCH",
+        body: { technicalScore, financialScore },
+      }),
+      invalidatesTags: ["bids"],
+    }),
   }),
 });
 
@@ -30,4 +39,5 @@ export const {
   useCreateBidMutation,
   useGetBidByIdQuery,
   useGetTenderBidsQuery,
+  useUpdateBidScoreMutation,
 } = bidApi;

@@ -1,4 +1,4 @@
-import CreateCategory from "@/components/Admin/Categories/CreateCategory";
+import CreateEditCategory from "@/components/Categories/For-Admin/CreateEditCategory";
 import Heading from "@/components/Shared/Heading";
 
 const Edit = () => {
@@ -9,7 +9,7 @@ const Edit = () => {
         description='A platform for venders to bid'
         keywords='Tender, Vender, Projects'
       />
-      <CreateCategory />
+      <CreateEditCategory />
     </div>
   );
 };

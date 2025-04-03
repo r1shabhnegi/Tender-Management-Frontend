@@ -1,6 +1,6 @@
 import Heading from "@/components/Shared/Heading";
 import React from "react";
-import ManageVenders from "@/components/Admin/Vendors/ManageVenders";
+import ManageVendors from "@/components/Vendor/For-Admin/ManageVendors";
 
 const Venders = () => {
   return (
@@ -10,7 +10,7 @@ const Venders = () => {
         description='A platform for venders to bid'
         keywords='Tender, Vender, Projects'
       />
-      <ManageVenders />
+      <ManageVendors />
     </div>
   );
 };

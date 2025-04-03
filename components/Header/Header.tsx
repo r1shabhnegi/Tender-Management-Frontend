@@ -12,12 +12,18 @@ import {
   Search,
   X,
 } from "lucide-react";
-import { inputStyle, primaryButtonStyle } from "@/app/Styles";
+import {
+  borderStyle,
+  inputStyle,
+  primaryButtonStyle,
+  secondaryButtonStyle,
+} from "@/app/Styles";
 import Image from "next/image";
 import logo from "@/public/TERI_50.png";
 import { Button } from "../ui/button";
 import { setTenderHomeSearchQuery } from "@/Redux/tender/tenderSlice";
 import { Input } from "../ui/input";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const {
@@ -38,7 +44,11 @@ const Header = () => {
   }
 
   return (
-    <header className='fixed border-b border-accent-color-2/10 bg-white/50 backdrop-blur-sm top-0 left-0 flex items-center w-full px-20 z-[600] h-[3.5rem] '>
+    <header
+      className={cn(
+        "fixed border-b bg-white/50 backdrop-blur-sm top-0 left-0 flex items-center w-full px-20 z-[600] h-[3.5rem]",
+        borderStyle
+      )}>
       <div className='flex justify-between items-center w-full '>
         <div className='flex items-center gap-8'>
           <Link
@@ -50,7 +60,7 @@ const Header = () => {
               height={30}
               width={30}
             />
-            <span className='text-2xl text-primary-1 font-bold'>TERI</span>
+            <span className='text-2xl text-primary font-bold'>TERI</span>
           </Link>
           <div className='w-[35rem] relative'>
             <label
@@ -89,7 +99,7 @@ const Header = () => {
                   {role === "admin" && (
                     <Link href={"/admin"}>
                       <Button
-                        className='bg-white border border-primary-1 text-primary-1 rounded-xl h-8 hover:bg-primary-1/5 hover:text-accent-color-2 px-3'
+                        className={cn(secondaryButtonStyle, "h-8")}
                         variant={"outline"}>
                         <LayoutDashboard />
                         Admin Dashboard
@@ -98,7 +108,7 @@ const Header = () => {
                   )}
                   {role === "vendor" && (
                     <Link href={"/vendor-board"}>
-                      <Button className='bg-white border border-primary-1 text-primary-1 rounded-xl  hover:bg-blue-700 hover:text-white px-4'>
+                      <Button className={cn(secondaryButtonStyle, "h-8")}>
                         <LayoutDashboard />
                         Vendor Dashboard
                       </Button>
@@ -108,13 +118,15 @@ const Header = () => {
               ) : (
                 <>
                   <Link href={"/sign-in"}>
-                    <Button className='bg-white border border-primary-1 text-primary-1 rounded-xl  hover:bg-blue-700 hover:text-white px-4'>
+                    <Button className={cn(secondaryButtonStyle, "h-8")}>
                       <LogIn />
                       Sign In
                     </Button>
                   </Link>
                   <Link href={"/register"}>
-                    <Button className={primaryButtonStyle}>Register Now</Button>
+                    <Button className={cn("h-8", primaryButtonStyle)}>
+                      Register Now
+                    </Button>
                   </Link>
                 </>
               )}
@@ -122,17 +134,10 @@ const Header = () => {
           ) : (
             <LoaderCircle className='animate-spin mr-28' />
           )}
-          {/* <Button
-            variant='outline'
-            size='icon'>
-            <Sun className='h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
-            <Moon className='absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
-            <span className='sr-only'>Toggle theme</span>
-          </Button> */}
           {isLoggedIn ? (
             <>
-              <div className='bg-[#F8F8F8] flex items-center justify-center size-9 rounded-full'>
-                <Bell className='size-5 text-accent-color-2' />
+              <div className='bg-[#F8F8F8] cursor-pointer flex items-center justify-center size-9 rounded-full'>
+                <Bell className='size-5 text-accent' />
               </div>
               <HeaderDropdown />
             </>

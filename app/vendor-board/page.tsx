@@ -1,6 +1,6 @@
 "use client";
-import VendorDashboard from "@/components/Vendor/VendorDashboard";
 import Heading from "@/components/Shared/Heading";
+import VendorDashboard from "@/components/Vendor/For-Vendor/VendorDashboard";
 import React from "react";
 
 const VendorBoard = () => {

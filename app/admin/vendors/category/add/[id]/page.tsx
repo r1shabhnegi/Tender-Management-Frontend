@@ -1,4 +1,4 @@
-import AddVenderCategory from "@/components/Admin/Vendors/VenderDetails/AddVenderCategory";
+import AddVenderCategory from "@/components/Vendor/For-Admin/AddVenderCategory";
 import Heading from "@/components/Shared/Heading";
 import React, { use } from "react";
 

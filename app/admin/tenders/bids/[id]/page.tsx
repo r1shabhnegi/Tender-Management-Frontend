@@ -1,5 +1,5 @@
 import Heading from "@/components/Shared/Heading";
-import TenderBids from "@/components/Bid/TenderBids";
+import BidsOnTender from "@/components/Bid/For-Admin/BidsOnTender";
 import React, { use } from "react";
 
 const Bids = ({ params }: { params: Promise<{ id: string }> }) => {
@@ -13,7 +13,7 @@ const Bids = ({ params }: { params: Promise<{ id: string }> }) => {
         description='A platform for venders to bid'
         keywords='Tender, Vender, Projects'
       />
-      <TenderBids tenderId={id} />
+      <BidsOnTender tenderId={id} />
     </div>
   );
 };

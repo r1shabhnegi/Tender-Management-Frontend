@@ -1,4 +1,4 @@
-import CategoryDetails from "@/components/Admin/Categories/CategoryDetails/CategoryDetails";
+import CategoryDetails from "@/components/Categories/For-Admin/CategoryDetails";
 import Heading from "@/components/Shared/Heading";
 import React, { use } from "react";
 

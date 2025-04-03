@@ -15,6 +15,8 @@ import { useRouter } from "next/navigation";
 import { capitalizeFirstLetter } from "@/lib/helper";
 import { Button } from "@/components/ui/button";
 import { ITenderCard } from "@/app/Types/Tender-Types";
+import { borderStyle, primaryButtonStyle } from "@/app/Styles";
+import { cn } from "@/lib/utils";
 
 const TenderCard: FC<{ tender: ITenderCard }> = ({ tender }) => {
   const router = useRouter();
@@ -50,12 +52,10 @@ const TenderCard: FC<{ tender: ITenderCard }> = ({ tender }) => {
 
   return (
     <div
-      className='relative transition-all duration-300 border-b-2 border-accent-color-2/10 rounded-x max-w-[60rem] overflow-hidden pb-4'
-      style={
-        {
-          // boxShadow: "0px 0px 8px 0px rgba(0, 0, 0, 0.1)",
-        }
-      }>
+      className={cn(
+        "relative duration-300 border-b border-gray-400/60 rounded-x max-w-[60rem] overflow-hidden pb-4",
+        borderStyle
+      )}>
       {/* <div className=' py-1 rounded-tl-xl rounded-tr-xl flex justify-between items-center px-4'>
         <div className='flex items-center'>
           <span className='font-medium text-black text-sm mr-1.5'>
@@ -86,10 +86,10 @@ const TenderCard: FC<{ tender: ITenderCard }> = ({ tender }) => {
 
           {/* Tags Section */}
           <div className='flex flex-wrap gap-2'>
-            <span className='px-3 py-1 text-xs font-medium bg-primary-1/5 text-accent-color-2 rounded-[0.4rem]'>
+            <span className='px-3 py-1 text-xs font-medium bg-primary/5 text-accent rounded-[0.4rem]'>
               {capitalizeFirstLetter(tender.type)}
             </span>
-            <span className='px-3 py-1 text-xs font-medium bg-primary-1/5 text-accent-color-2 rounded-[0.4rem]'>
+            <span className='px-3 py-1 text-xs font-medium bg-primary/5 text-accent rounded-[0.4rem]'>
               {capitalizeFirstLetter(tender.category)}
             </span>
           </div>
@@ -97,7 +97,7 @@ const TenderCard: FC<{ tender: ITenderCard }> = ({ tender }) => {
           {/* Details Grid */}
           <div className='grid grid-cols-2 gap-4'>
             <div className='flex items-center text-gray-600'>
-              <div className='p-2 mr-3 bg-primary-1/5 flex items-center justify-center rounded-full'>
+              <div className='p-2 mr-3 bg-primary/5 flex items-center justify-center rounded-full'>
                 <Briefcase className='text-gray-600 size-4' />
               </div>
               <div className='flex flex-col'>
@@ -108,7 +108,7 @@ const TenderCard: FC<{ tender: ITenderCard }> = ({ tender }) => {
               </div>
             </div>
             <div className='flex items-center text-gray-600'>
-              <div className='p-2 mr-3 bg-primary-1/5 flex items-center justify-center rounded-full'>
+              <div className='p-2 mr-3 bg-primary/5 flex items-center justify-center rounded-full'>
                 <MapPin className='text-gray-600 size-4' />
               </div>
               <div className='flex flex-col'>
@@ -119,7 +119,7 @@ const TenderCard: FC<{ tender: ITenderCard }> = ({ tender }) => {
               </div>
             </div>
             <div className='flex items-center text-gray-600'>
-              <div className='p-2 mr-3 bg-primary-1/5 flex items-center justify-center rounded-full'>
+              <div className='p-2 mr-3 bg-primary/5 flex items-center justify-center rounded-full'>
                 <Tag className='text-gray-600 size-4' />
               </div>
               <div className='flex flex-col'>
@@ -130,7 +130,7 @@ const TenderCard: FC<{ tender: ITenderCard }> = ({ tender }) => {
               </div>
             </div>
             <div className='flex items-center text-gray-600'>
-              <div className='p-2 mr-3 bg-primary-1/5 flex items-center justify-center rounded-full'>
+              <div className='p-2 mr-3 bg-primary/5 flex items-center justify-center rounded-full'>
                 <FileCode2 className='text-gray-600 size-4' />
               </div>
               <div className='flex flex-col'>
@@ -176,7 +176,7 @@ const TenderCard: FC<{ tender: ITenderCard }> = ({ tender }) => {
           {/* Action Button */}
           <Button
             onClick={() => router.push(`/tender/${tender.id}`)}
-            className='w-full bg-gradient-to-r from-accent-color-2 to-accent-color-2/80 hover:from-accent-color-2/50 hover:to-accent-color-2 text-white py-2.5 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-sm group'>
+            className={primaryButtonStyle}>
             <span>View Details</span>
             <ArrowRight className='size-4 group-hover:translate-x-0.5 transition-transform' />
           </Button>

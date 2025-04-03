@@ -20,7 +20,7 @@ const RegistrationPendingMsg = () => {
 
   return (
     <div className='pt-[3.5rem] flex justify-center items-center'>
-      <div className='bg-card-color max-w-[35rem] w-full mt-20 p-10 rounded-xl'>
+      <div className='bg-card max-w-[35rem] w-full mt-20 p-10 rounded-xl'>
         <h2 className='text-center font-bold text-2xl text-gray-900'>
           We will get back to you in 24 to 72 hours
         </h2>

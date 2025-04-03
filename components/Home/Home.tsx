@@ -1,22 +1,17 @@
 "use client";
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import {
-  BookOpen,
-  CheckCircle2,
-  FileText,
-  ShieldCheck,
-  ShoppingBag,
-  Zap,
-} from "lucide-react";
+import { CheckCircle2, FileText, ShoppingBag } from "lucide-react";
 import HomeSidebar from "./HomeSidebar";
-import HomeHeader from "./HomeHeader";
-import HomeTendersNavBar from "./HomeTendersNavBar";
+import HomeBanner from "./HomeBanner";
+import HomeTendersActionBar from "./HomeTendersActionBar";
 import HomeTenders from "./HomeTenders";
 import { useSelector } from "react-redux";
 import { RootState } from "@/Redux/store";
+import { cn } from "@/lib/utils";
+import { borderStyle } from "@/app/Styles";
 
 const Home = () => {
   const { isLoggedIn, isRefreshing: isLoading } = useSelector(
@@ -27,169 +22,44 @@ const Home = () => {
     <div className='mx-auto px-4 max-w-7xl'>
       <div className='flex flex-col md:flex-row gap-8'>
         <div className='flex-1'>
-          {!isLoggedIn && !isLoading ? <HomeHeader /> : null}
-          <HomeTendersNavBar />
-          {/* <div className='flex items-center mb-8 mt-2 justify-end gap-2'>
-            <span className='text-sm bg-blue-100 px-2 py-1 rounded-lg text-text-color-1 font-semibold mb-4'>
-              Latest Tenders
-            </span>
-          </div> */}
-          <div className='flex border-b pb-4 border-primary-color-1/20 mb-3 items-center mt-8 justify- gap-2'>
-            {/* <span className='text-sm bg-blue-100 px-2 py-1 rounded-lg text-text-color-1 font-semibold mb-4'>
-              Latest Tenders
-            </span> */}
-            <span className='text-2xl font-semibold text-text-color-1'>
-              Latest Tenders
-            </span>
+          {!isLoggedIn && !isLoading ? <HomeBanner /> : null}
+          <HomeTendersActionBar />
+          <div className={cn("bg-white px-4 pb-4 mb-6 border-b", borderStyle)}>
+            <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3'>
+              <div className=' w-full flex items-center gap-3'>
+                <div className='w-full'>
+                  <div className='flex w-full justify-end flex-wrap gap-2 mt-2'>
+                    {/* Example filters - these would be dynamic based on applied filters */}
+                    <span className='text-xs bg-blue-50 text-blue-700 px-3 py-1 rounded-full border border-blue-100 inline-flex items-center gap-1'>
+                      <FileText className='h-3 w-3' />
+                      Category: IT Services
+                    </span>
+                    <span className='text-xs bg-green-50 text-green-700 px-3 py-1 rounded-full border border-green-100 inline-flex items-center gap-1'>
+                      <CheckCircle2 className='h-3 w-3' />
+                      Status: Active
+                    </span>
+                    <span className='text-xs bg-purple-50 text-purple-700 px-3 py-1 rounded-full border border-purple-100 inline-flex items-center gap-1'>
+                      <ShoppingBag className='h-3 w-3' />
+                      Value: ₹10L - ₹50L
+                    </span>
+                    <Button
+                      variant='outline'
+                      size='sm'
+                      className='text-gray-500 rounded-full hover:text-gray-700 border-gray-200'>
+                      Clear Filters
+                    </Button>
+                  </div>
+                  <h2 className='text-2xl font-semibold text-gray-900'>
+                    Latest Tenders
+                  </h2>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <HomeTenders />
 
           <HomeTenders />
         </div>
         <HomeSidebar />
-      </div>
-
-      {/* Information Cards */}
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 mt-10'>
-        <Card className='bg-white shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100/60 rounded-xl overflow-hidden'>
-          <div className='h-1.5 bg-blue-500 w-full'></div>
-          <CardHeader className='pb-2 pt-5'>
-            <CardTitle className='text-lg font-medium flex items-center text-gray-800'>
-              <div className='bg-blue-100/70 p-2 rounded-md mr-3'>
-                <ShoppingBag className='h-5 w-5 text-blue-600' />
-              </div>
-              For Vendors
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className='text-sm text-gray-600 mb-5 leading-relaxed'>
-              Access new business opportunities, purchase tender documents, and
-              submit competitive bids all in one place.
-            </p>
-            <Link
-              href='/vendor-board'
-              className='block'>
-              <Button
-                variant='outline'
-                className='w-full bg-white hover:bg-blue-50 border-blue-200 text-blue-700 hover:text-blue-800 rounded-lg transition-all font-medium'>
-                Vendor Dashboard
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-
-        <Card className='bg-white shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100/60 rounded-xl overflow-hidden'>
-          <div className='h-1.5 bg-purple-500 w-full'></div>
-          <CardHeader className='pb-2 pt-5'>
-            <CardTitle className='text-lg font-medium flex items-center text-gray-800'>
-              <div className='bg-purple-100/70 p-2 rounded-md mr-3'>
-                <FileText className='h-5 w-5 text-purple-600' />
-              </div>
-              For Organizations
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className='text-sm text-gray-600 mb-5 leading-relaxed'>
-              Publish tenders, manage vendor applications, and evaluate bids
-              efficiently with our comprehensive tools.
-            </p>
-            <Link
-              href='/admin'
-              className='block'>
-              <Button
-                variant='outline'
-                className='w-full bg-white hover:bg-purple-50 border-purple-200 text-purple-700 hover:text-purple-800 rounded-lg transition-all font-medium'>
-                Admin Portal
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-
-        <Card className='bg-white shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100/60 rounded-xl overflow-hidden'>
-          <div className='h-1.5 bg-green-500 w-full'></div>
-          <CardHeader className='pb-2 pt-5'>
-            <CardTitle className='text-lg font-medium flex items-center text-gray-800'>
-              <div className='bg-green-100/70 p-2 rounded-md mr-3'>
-                <ShieldCheck className='h-5 w-5 text-green-600' />
-              </div>
-              Transparency & Compliance
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className='text-sm text-gray-600 mb-5 leading-relaxed'>
-              Our platform ensures fair competition, transparency in the bidding
-              process, and compliance with regulations.
-            </p>
-            <Link
-              href='/about'
-              className='block'>
-              <Button
-                variant='outline'
-                className='w-full bg-white hover:bg-green-50 border-green-200 text-green-700 hover:text-green-800 rounded-lg transition-all font-medium'>
-                Learn More
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Why Choose Us Section */}
-      <div className='bg-gradient-to-br from-slate-50 to-blue-50/40 p-8 rounded-xl border border-blue-100/40 shadow-sm mb-12'>
-        <h2 className='text-2xl font-bold mb-10 text-center text-gray-800 relative inline-block left-1/2 -translate-x-1/2'>
-          Why Choose Our Platform?
-          <span className='block h-1 w-20 bg-blue-500 mt-2 mx-auto rounded-full'></span>
-        </h2>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
-          <div className='flex flex-col items-center text-center group bg-white p-6 rounded-xl border border-gray-100/80 shadow-sm hover:shadow-md transition-all duration-300'>
-            <div className='bg-blue-100/50 p-4 rounded-xl mb-4 group-hover:bg-blue-100 transition-all'>
-              <Zap className='h-6 w-6 text-blue-600' />
-            </div>
-            <h3 className='font-semibold mb-2 text-gray-800'>
-              Streamlined Process
-            </h3>
-            <p className='text-sm text-gray-600 leading-relaxed'>
-              End-to-end management of the tender lifecycle from publication to
-              award notification
-            </p>
-          </div>
-          <div className='flex flex-col items-center text-center group bg-white p-6 rounded-xl border border-gray-100/80 shadow-sm hover:shadow-md transition-all duration-300'>
-            <div className='bg-green-100/50 p-4 rounded-xl mb-4 group-hover:bg-green-100 transition-all'>
-              <CheckCircle2 className='h-6 w-6 text-green-600' />
-            </div>
-            <h3 className='font-semibold mb-2 text-gray-800'>
-              Vendor Verification
-            </h3>
-            <p className='text-sm text-gray-600 leading-relaxed'>
-              Verified vendor profiles ensure quality and trustworthy
-              participants in every tender
-            </p>
-          </div>
-          <div className='flex flex-col items-center text-center group bg-white p-6 rounded-xl border border-gray-100/80 shadow-sm hover:shadow-md transition-all duration-300'>
-            <div className='bg-purple-100/50 p-4 rounded-xl mb-4 group-hover:bg-purple-100 transition-all'>
-              <BookOpen className='h-6 w-6 text-purple-600' />
-            </div>
-            <h3 className='font-semibold mb-2 text-gray-800'>
-              Real-time Updates
-            </h3>
-            <p className='text-sm text-gray-600 leading-relaxed'>
-              Get instant notifications about new tenders and bid status changes
-              via email and dashboard
-            </p>
-          </div>
-          <div className='flex flex-col items-center text-center group bg-white p-6 rounded-xl border border-gray-100/80 shadow-sm hover:shadow-md transition-all duration-300'>
-            <div className='bg-amber-100/50 p-4 rounded-xl mb-4 group-hover:bg-amber-100 transition-all'>
-              <ShieldCheck className='h-6 w-6 text-amber-600' />
-            </div>
-            <h3 className='font-semibold mb-2 text-gray-800'>
-              Secure Documentation
-            </h3>
-            <p className='text-sm text-gray-600 leading-relaxed'>
-              All tender documents and bid submissions are securely stored and
-              managed with encryption
-            </p>
-          </div>
-        </div>
       </div>
 
       {/* Testimonials Section */}
@@ -271,9 +141,6 @@ const Home = () => {
           </Link>
         </div>
       </div>
-      <iframe
-        src='https://india-trade-network.vercel.app'
-        className='w-full h-[100vh]'></iframe>
     </div>
   );
 };

@@ -1,9 +1,8 @@
-import { formLabelStyle } from "@/app/Styles";
 import PdfViewerModal from "@/components/Shared/PdfViewerModal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Eye, FileUp } from "lucide-react";
+import { Eye, FileUp, FileCheck, AlertTriangle } from "lucide-react";
 import React, { FC, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
@@ -40,220 +39,250 @@ const VenderDocumentsInfo: FC<Props> = ({ handleVenderMutate, setActive }) => {
 
   const showErrorMessage = (fieldName: keyof typeof errors) => {
     return errors[fieldName] ? (
-      <p className='text-red-600 text-xs mt-1'>
+      <p className='text-red-600 text-[0.85rem] ml-0.5 mt-1.5'>
         {errors[fieldName]?.message as string}
       </p>
     ) : null;
   };
 
   return (
-    <div className='flex justify-center'>
-      <div className='rounded-xl drop-shadow bg-card-color w-full flex justify-center my-10 flex-col'>
-        <div className='mt-8'>
-          <h1 className='font-medium text-2xl text-center'>
-            Vendor Registration
-          </h1>
-        </div>
-
-        <div className='rounded-md p-4 mx-4 mt-4'>
-          <h2 className='text-lg mb-5 ml-2.5 border-b-[1px] pb-4 border-gray-300'>
-            <span className='text-blue-600 font-semibold'>Step 3</span>:
-            Documents
+    <div className='p-6'>
+      <div className='mb-6'>
+        <div className='flex items-center gap-2 mb-2'>
+          <FileCheck
+            size={18}
+            className='text-primary'
+          />
+          <h2 className='text-xl font-semibold text-gray-900'>
+            Document Verification
           </h2>
-          <p className='bg-white flex items-start rounded-lg  px-6 py-6'>
-            <span className='font-semibold text-gray-900 mr-1'>Note:</span>
-            <span className='text-gray-700'>
-              This is the Final step, Please self-attest the documents by
-              signing them, adding the current date, and attaching them to your
-              submission.
-            </span>
+        </div>
+        <p className='text-gray-600 ml-6'>
+          Upload the required documents to verify your business details.
+        </p>
+      </div>
+
+      <div className='bg-blue-50 p-4 mb-6 rounded-lg border border-blue-200 flex items-start gap-3'>
+        <AlertTriangle
+          size={18}
+          className='text-blue-600 shrink-0 mt-0.5'
+        />
+        <div className='text-sm text-gray-700'>
+          <p className='font-medium text-blue-800 mb-1'>Important:</p>
+          <p>
+            Please self-attest all documents by signing them and adding the
+            current date before uploading. This is the final step in your
+            registration process.
           </p>
         </div>
+      </div>
 
-        <div className='flex items-center justify-evenly'>
-          <div className='w-1/2 p-4 flex items-center justify-center flex-col gap-5'>
-            <div className='w-[20rem] ml-1'>
-              <label className={formLabelStyle}>Pan-Card Document</label>
-              <p className='text-[0.82rem] ml-0.5 mt-2 font-medium text-gray-700'>
-                Upload scanned copy of PAN Card with self attestation with
-                current date.
-              </p>
-            </div>
-
-            <Card className='w-[20rem] flex shadow-none items-center justify-center'>
-              <CardContent className='p-0 w-full'>
-                <div className='text-sm m-5'>
-                  <label
-                    htmlFor={`file_panCard`}
-                    className={formLabelStyle}>
-                    <span className='text-gray-700'>PDF Upload</span>
-                    <div className='flex flex-col mt-2 gap-1'>
-                      <Controller
-                        name='panCardDoc'
-                        control={control}
-                        rules={{
-                          required: "Please upload your PAN card document.",
-                          validate: {
-                            isPdf: (value) =>
-                              !value ||
-                              value[0]?.type === "application/pdf" ||
-                              "Please select a PDF file.",
-                            fileSize: (value) =>
-                              !value ||
-                              value[0]?.size <= 5 * 1024 * 1024 ||
-                              "File size should not exceed 5MB.",
-                          },
-                        }}
-                        render={({ field: { onChange, ref } }) => (
-                          <Input
-                            id={`file_panCard`}
-                            type='file'
-                            className='hidden'
-                            placeholder='File'
-                            accept='application/pdf'
-                            ref={ref}
-                            onChange={(e) => {
-                              onChange(e.target.files);
-                            }}
-                          />
-                        )}
-                      />
-                      {showErrorMessage("panCardDoc")}
-
-                      {watchPanCard?.[0] ? (
-                        <div>
-                          <div className='border-2 border-dashed p-4 cursor-pointer border-green-400 bg-green-50 rounded-lg flex flex-col gap-2 items-center justify-center'>
-                            <p className='line-clamp-1 text-green-600 font-medium w-[14rem]'>
-                              {watchPanCard[0].name}
-                            </p>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className='border-2 border-dashed p-4 cursor-pointer border-gray-300 rounded-lg flex flex-col gap-2 items-center justify-center'>
-                          <FileUp className='w-10 h-10 text-gray-400' />
-                          <p className='text-center text-sm font-medium text-gray-700 flex flex-col'>
-                            <span>Click to upload PDF</span>
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </label>
-                  {watchPanCard?.[0] && (
-                    <div className='mt-3.5 w-full flex justify-center items-center'>
-                      <Button
-                        type='button'
-                        onClick={() => handleViewPdf(watchPanCard[0])}
-                        className='w-full hover:bg-blue-300 text-gray-900 bg-blue-200 rounded-lg'>
-                        <Eye /> View PDF
-                      </Button>
-                    </div>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+        {/* PAN Card Document */}
+        <div className='space-y-4'>
+          <div>
+            <h3 className='text-base font-semibold text-gray-800 flex items-center gap-1.5'>
+              <FileCheck
+                size={16}
+                className='text-primary'
+              />
+              PAN Card Document
+              <span className='text-red-500'>*</span>
+            </h3>
+            <p className='text-sm text-gray-600 mt-1'>
+              Upload a scanned copy of your PAN Card with self-attestation and
+              current date.
+            </p>
           </div>
 
-          <div className='w-1/2 p-4 flex items-center justify-center flex-col gap-5'>
-            <div className='w-[20rem] ml-1'>
-              <label className={formLabelStyle}>
-                Company Registration Document
-              </label>
-              <p className='text-[0.82rem] ml-0.5 mt-2 font-medium text-gray-700'>
-                Upload scanned copy of Registration Certificate with self
-                attestation with current date
-              </p>
-            </div>
-
-            <Card className='w-[20rem] flex shadow-none items-center justify-center'>
-              <CardContent className='p-0 w-full'>
-                <div className='text-sm m-5'>
-                  <label
-                    htmlFor={`file_companyRegistration`}
-                    className=''>
-                    <span className='text-gray-700'>PDF Upload</span>
-
-                    <div className='flex flex-col mt-2 gap-1'>
-                      <Controller
-                        name='registrationDoc'
-                        control={control}
-                        rules={{
-                          required:
-                            "Please upload your Company Registration document.",
-                          validate: {
-                            isPdf: (value) =>
-                              !value ||
-                              value[0]?.type === "application/pdf" ||
-                              "Please select a PDF file.",
-                            fileSize: (value) =>
-                              !value ||
-                              value[0]?.size <= 5 * 1024 * 1024 ||
-                              "File size should not exceed 5MB.",
-                          },
+          <Card className='border border-gray-200 shadow-sm'>
+            <CardContent className='p-5'>
+              <div className='space-y-4'>
+                <label
+                  htmlFor='file_panCard'
+                  className='block'>
+                  <Controller
+                    name='panCardDoc'
+                    control={control}
+                    rules={{
+                      required: "Please upload your PAN card document",
+                      validate: {
+                        isPdf: (value) =>
+                          !value ||
+                          value[0]?.type === "application/pdf" ||
+                          "Please select a PDF file",
+                        fileSize: (value) =>
+                          !value ||
+                          value[0]?.size <= 5 * 1024 * 1024 ||
+                          "File size should not exceed 5MB",
+                      },
+                    }}
+                    render={({ field: { onChange, ref } }) => (
+                      <Input
+                        id='file_panCard'
+                        type='file'
+                        className='hidden'
+                        placeholder='File'
+                        accept='application/pdf'
+                        ref={ref}
+                        onChange={(e) => {
+                          onChange(e.target.files);
                         }}
-                        render={({ field: { onChange, ref } }) => (
-                          <Input
-                            id={`file_companyRegistration`}
-                            type='file'
-                            className='hidden'
-                            placeholder='File'
-                            accept='application/pdf'
-                            ref={ref}
-                            onChange={(e) => {
-                              onChange(e.target?.files);
-                            }}
-                          />
-                        )}
                       />
-                      {showErrorMessage("registrationDoc")}
+                    )}
+                  />
 
-                      {watchRegistrationDoc?.[0] ? (
-                        <div>
-                          <div className='border-2 border-dashed p-4 cursor-pointer border-green-400 bg-green-50 rounded-lg flex flex-col gap-2 items-center justify-center'>
-                            <p className='line-clamp-1 text-green-600 font-medium w-[14rem]'>
-                              {watchRegistrationDoc[0].name}
-                            </p>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className='border-2 border-dashed p-4 cursor-pointer border-gray-300 rounded-lg flex flex-col gap-2 items-center justify-center'>
-                          <FileUp className='w-10 h-10 text-gray-400' />
-                          <p className='text-center text-sm font-medium text-gray-700 flex flex-col'>
-                            <span>Click to upload PDF</span>
-                          </p>
-                        </div>
-                      )}
+                  {watchPanCard?.[0] ? (
+                    <div className='border-2 border-dashed p-4 cursor-pointer border-green-400 bg-green-50 rounded-lg flex flex-col gap-2 items-center justify-center'>
+                      <FileCheck className='w-8 h-8 text-green-600' />
+                      <p className='line-clamp-1 text-green-700 font-medium text-sm text-center'>
+                        {watchPanCard[0].name}
+                      </p>
+                      <p className='text-xs text-green-600'>
+                        Click to change file
+                      </p>
                     </div>
-                  </label>
-                  {watchRegistrationDoc?.[0] && (
-                    <div className='mt-3.5 w-full flex justify-center items-center'>
-                      <Button
-                        type='button'
-                        onClick={() => handleViewPdf(watchRegistrationDoc[0])}
-                        className='w-full hover:bg-blue-300 text-gray-900 bg-blue-200 rounded-lg'>
-                        <Eye /> View PDF
-                      </Button>
+                  ) : (
+                    <div className='border-2 border-dashed p-6 cursor-pointer border-gray-300 hover:border-primary hover:bg-gray-50 rounded-lg flex flex-col gap-3 items-center justify-center transition-all'>
+                      <FileUp className='w-10 h-10 text-gray-400' />
+                      <div className='text-center'>
+                        <p className='text-sm font-medium text-gray-700'>
+                          Click to upload PDF
+                        </p>
+                        <p className='text-xs text-gray-500 mt-1'>
+                          PDF only, max 5MB
+                        </p>
+                      </div>
                     </div>
                   )}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                </label>
+                {showErrorMessage("panCardDoc")}
+
+                {watchPanCard?.[0] && (
+                  <Button
+                    type='button'
+                    onClick={() => handleViewPdf(watchPanCard[0])}
+                    variant='outline'
+                    className='w-full flex items-center justify-center gap-2 h-9 text-primary border-primary/30 hover:bg-primary/10'>
+                    <Eye size={16} /> View Document
+                  </Button>
+                )}
+              </div>
+            </CardContent>
+          </Card>
         </div>
-        <div className='flex gap-5 px-16 pb-8 mt-6 items-center justify-between'>
-          <Button
-            type='button'
-            onClick={() => setActive(1)}
-            className='bg-blue-200 rounded-lg hover:bg-blue-300  font-semibold text-gray-900 transition-colors duration-300'>
-            Previous
-          </Button>
-          <Button
-            type='button'
-            onClick={handleVenderMutate}
-            className='bg-blue-600 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300'>
-            Register Vender
-          </Button>
+
+        {/* Registration Document */}
+        <div className='space-y-4'>
+          <div>
+            <h3 className='text-base font-semibold text-gray-800 flex items-center gap-1.5'>
+              <FileCheck
+                size={16}
+                className='text-primary'
+              />
+              Company Registration Document
+              <span className='text-red-500'>*</span>
+            </h3>
+            <p className='text-sm text-gray-600 mt-1'>
+              Upload a scanned copy of your Registration Certificate with
+              self-attestation and current date.
+            </p>
+          </div>
+
+          <Card className='border border-gray-200 shadow-sm'>
+            <CardContent className='p-5'>
+              <div className='space-y-4'>
+                <label
+                  htmlFor='file_companyRegistration'
+                  className='block'>
+                  <Controller
+                    name='registrationDoc'
+                    control={control}
+                    rules={{
+                      required:
+                        "Please upload your Company Registration document",
+                      validate: {
+                        isPdf: (value) =>
+                          !value ||
+                          value[0]?.type === "application/pdf" ||
+                          "Please select a PDF file",
+                        fileSize: (value) =>
+                          !value ||
+                          value[0]?.size <= 5 * 1024 * 1024 ||
+                          "File size should not exceed 5MB",
+                      },
+                    }}
+                    render={({ field: { onChange, ref } }) => (
+                      <Input
+                        id='file_companyRegistration'
+                        type='file'
+                        className='hidden'
+                        placeholder='File'
+                        accept='application/pdf'
+                        ref={ref}
+                        onChange={(e) => {
+                          onChange(e.target?.files);
+                        }}
+                      />
+                    )}
+                  />
+
+                  {watchRegistrationDoc?.[0] ? (
+                    <div className='border-2 border-dashed p-4 cursor-pointer border-green-400 bg-green-50 rounded-lg flex flex-col gap-2 items-center justify-center'>
+                      <FileCheck className='w-8 h-8 text-green-600' />
+                      <p className='line-clamp-1 text-green-700 font-medium text-sm text-center'>
+                        {watchRegistrationDoc[0].name}
+                      </p>
+                      <p className='text-xs text-green-600'>
+                        Click to change file
+                      </p>
+                    </div>
+                  ) : (
+                    <div className='border-2 border-dashed p-6 cursor-pointer border-gray-300 hover:border-primary hover:bg-gray-50 rounded-lg flex flex-col gap-3 items-center justify-center transition-all'>
+                      <FileUp className='w-10 h-10 text-gray-400' />
+                      <div className='text-center'>
+                        <p className='text-sm font-medium text-gray-700'>
+                          Click to upload PDF
+                        </p>
+                        <p className='text-xs text-gray-500 mt-1'>
+                          PDF only, max 5MB
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </label>
+                {showErrorMessage("registrationDoc")}
+
+                {watchRegistrationDoc?.[0] && (
+                  <Button
+                    type='button'
+                    onClick={() => handleViewPdf(watchRegistrationDoc[0])}
+                    variant='outline'
+                    className='w-full flex items-center justify-center gap-2 h-9 text-primary border-primary/30 hover:bg-primary/10'>
+                    <Eye size={16} /> View Document
+                  </Button>
+                )}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
+
+      <div className='flex justify-between mt-8 pt-6 border-t border-gray-200'>
+        <Button
+          type='button'
+          onClick={() => setActive(1)}
+          className='border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 px-4 h-10'>
+          Back to Business Info
+        </Button>
+        <Button
+          type='button'
+          onClick={handleVenderMutate}
+          className='bg-primary hover:bg-primary/90 text-white px-6 h-10'>
+          Complete Registration
+        </Button>
+      </div>
+
       {isPdfModal && (
         <PdfViewerModal
           file={isViewFile}

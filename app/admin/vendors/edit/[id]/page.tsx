@@ -1,4 +1,4 @@
-import VendorEdit from "@/components/Admin/Vendors/VendorEdit";
+import VendorEdit from "@/components/Vendor/For-Admin/VendorEdit";
 import Heading from "@/components/Shared/Heading";
 import { use } from "react";
 

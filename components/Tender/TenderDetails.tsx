@@ -18,7 +18,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/Redux/store";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
-import { Card } from "../ui/card";
 
 interface TenderData {
   id: string;
@@ -97,10 +96,10 @@ interface DateDisplayProps {
 
 function DateDisplay({ label, date }: DateDisplayProps) {
   return (
-    <div className='flex items-center gap-2 text-sm'>
+    <div className='flex items-center gap-2 text-sm mb-3'>
       <Calendar className='w-4 h-4 text-gray-500' />
       <span className='font-medium text-gray-900'>{label}:</span>
-      <span className='text-gray-900'>{format(new Date(date), "PPP")}</span>
+      <span className='text-gray-700'>{format(new Date(date), "PPP")}</span>
     </div>
   );
 }
@@ -113,13 +112,13 @@ interface SectionProps {
 
 function Section({ title, icon: Icon, children }: SectionProps) {
   return (
-    <Card className='w-full border-none rounded-xl shadow-sm p-6 mb-6 bg-card-color'>
-      <div className='flex items-center gap-2 mb-4'>
+    <div className='bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden mb-6'>
+      <div className='p-4 bg-gray-50 border-b flex items-center gap-2'>
         <Icon className='w-5 h-5 text-primary' />
-        <h2 className='text-xl font-semibold text-gray-900'>{title}</h2>
+        <h2 className='font-semibold text-gray-900'>{title}</h2>
       </div>
-      {children}
-    </Card>
+      <div className='p-6'>{children}</div>
+    </div>
   );
 }
 
@@ -140,25 +139,24 @@ const TenderDetails: FC<TenderDetailsProps> = ({ tenderData }) => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "live":
-        return "bg-green-100 text-green-800";
+        return "bg-green-100 text-green-800 border-green-200";
       case "closed":
-        return "bg-red-100 text-red-800";
+        return "bg-red-100 text-red-800 border-red-200";
       default:
-        return "bg-gray-100 text-gray-900";
+        return "bg-gray-100 text-gray-700 border-gray-200";
     }
   };
 
   return (
     <GeneralWrapper>
-      <div className='mb-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        {/* Header */}
-        <header className='mb-8'>
-          <div className='flex flex-col items-center justify-center py-8'>
-            <h1 className='text-3xl md:text-4xl text-gray-900 font-bold mb-4'>
+      <div className='w-full bg-white mb-8'>
+        <div className='container mx-auto px-6 py-8'>
+          <div className='flex flex-col items-center'>
+            <h1 className='text-3xl font-bold text-gray-900 mb-4'>
               Tender Details
             </h1>
 
-            <div className='flex flex-col sm:flex-row items-center gap-3 mb-2'>
+            <div className='flex flex-col sm:flex-row items-center gap-3 mb-3'>
               <p className='text-gray-700 font-medium'>
                 <span className='text-gray-500'>Tender Number:</span>{" "}
                 {tender.tender_number}
@@ -166,7 +164,7 @@ const TenderDetails: FC<TenderDetailsProps> = ({ tenderData }) => {
 
               {isLoggedIn && (
                 <Badge
-                  variant={tender.status === "live" ? "secondary" : "default"}
+                  variant='outline'
                   className={`capitalize ${getStatusColor(tender.status)}`}>
                   {tender.status}
                 </Badge>
@@ -180,9 +178,10 @@ const TenderDetails: FC<TenderDetailsProps> = ({ tenderData }) => {
               </span>
             </div>
           </div>
-        </header>
+        </div>
+      </div>
 
-        {/* Main Content */}
+      <div className='container mx-auto px-6 mb-12'>
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
           {/* Left Column */}
           <div className='lg:col-span-2 space-y-6'>
@@ -414,18 +413,28 @@ const TenderDetails: FC<TenderDetailsProps> = ({ tenderData }) => {
           </div>
         </div>
 
-        <div className='mt-8 pt-6 border-t '>
-          <Link href={`/tender/buy/${tender.id}`}>
-            <Button
-              size='lg'
-              className='bg-blue-600 hover:bg-blue-700 transition-all duration-300 rounded-xl'>
-              Buy Tender
-            </Button>
-          </Link>
-          <p className='mt-2 text-sm text-gray-500'>
-            By buying this tender, you will be able to bid on it.
-          </p>
-        </div>
+        {isLoggedIn && (
+          <div className='bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-6 mt-8'>
+            <div className='flex flex-col sm:flex-row items-center justify-between gap-4'>
+              <div>
+                <h3 className='text-lg font-semibold text-gray-900 mb-1'>
+                  Interested in this tender?
+                </h3>
+                <p className='text-gray-600'>
+                  Purchase this tender to submit your bid and participate in the
+                  bidding process.
+                </p>
+              </div>
+              <Link href={`/tender/buy/${tender.id}`}>
+                <Button
+                  size='lg'
+                  className='bg-primary hover:bg-primary/90 text-white rounded-md'>
+                  Buy Tender
+                </Button>
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </GeneralWrapper>
   );

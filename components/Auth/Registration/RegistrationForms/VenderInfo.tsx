@@ -1,7 +1,7 @@
-import { formLabelStyle, inputStyle, primaryButtonStyle } from "@/app/Styles";
 import { IVenderRegistrationForm } from "@/app/Types/User-Types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Info, Mail, Phone, User, CreditCard, Lock } from "lucide-react";
 import React, { FC, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -41,176 +41,231 @@ const VendorInfo: FC<Props> = ({ handleNextStep }) => {
 
   const showErrorMessage = (fieldName: keyof typeof errors) => {
     return showErrors && errors[fieldName] ? (
-      <p className='text-red-600 text-[0.85rem] ml-0.5 mt-1'>
+      <p className='text-red-600 text-[0.85rem] ml-0.5 mt-1.5'>
         {errors[fieldName]?.message as string}
       </p>
     ) : null;
   };
 
   return (
-    <div className='flex items-center justify-center'>
-      <div className='drop-shadow bg-card-color p-2 rounded-xl w-full flex justify-center mt-8 flex-col'>
-        <div className='mt-8'>
-          <h1 className='font-medium text-2xl text-center'>
-            Vendor Registration
-          </h1>
+    <div className='p-6'>
+      <div className='mb-6'>
+        <div className='flex items-center gap-2 mb-2'>
+          <Info
+            size={18}
+            className='text-primary'
+          />
+          <h2 className='text-xl font-semibold text-gray-900'>
+            Personal Information
+          </h2>
+        </div>
+        <p className='text-gray-600 ml-6'>
+          Please provide your personal details to create your vendor account.
+        </p>
+      </div>
+
+      <div className='bg-gray-50 p-4 mb-6 rounded-lg border border-gray-200 flex items-center gap-3'>
+        <Info
+          size={18}
+          className='text-blue-600 shrink-0'
+        />
+        <p className='text-sm text-gray-700'>
+          <span className='font-medium'>Note:</span> You will be asked to upload
+          supporting documents in a later step.
+        </p>
+      </div>
+
+      <div className='space-y-6'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+          <div className='space-y-1.5'>
+            <label
+              htmlFor='email'
+              className='text-sm font-medium text-gray-700 flex items-center gap-1.5'>
+              <Mail
+                size={15}
+                className='text-gray-500'
+              />
+              Email Address
+              <span className='text-red-500'>*</span>
+            </label>
+            <Input
+              id='email'
+              className='h-10 border-gray-300 focus:border-primary focus:ring-primary/30'
+              placeholder='Enter your email address'
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: "Invalid email format",
+                },
+              })}
+            />
+            {showErrorMessage("email")}
+          </div>
+
+          <div className='space-y-1.5'>
+            <label
+              htmlFor='fullname'
+              className='text-sm font-medium text-gray-700 flex items-center gap-1.5'>
+              <User
+                size={15}
+                className='text-gray-500'
+              />
+              Full Name
+              <span className='text-red-500'>*</span>
+            </label>
+            <Input
+              id='fullname'
+              className='h-10 border-gray-300 focus:border-primary focus:ring-primary/30'
+              placeholder='Enter your full name'
+              {...register("fullname", {
+                required: "Full name is required",
+                minLength: {
+                  value: 2,
+                  message: "Full name must be at least 2 characters",
+                },
+              })}
+            />
+            {showErrorMessage("fullname")}
+          </div>
         </div>
 
-        <div className='rounded-md p-4 mx-4 mt-4'>
-          <h2 className='text-lg mb-5 ml-2.5 border-b-[1px] pb-4 border-gray-300'>
-            <span className='text-blue-600 font-semibold'>Step 1</span> : Vendor
-            Information
-          </h2>
-          <p className='bg-white rounded-lg text-gray-700 px-6 py-6'>
-            <span className='font-semibold text-gray-900 mr-1'>Note:</span>You
-            need to attach relevant documents in the next step
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+          <div className='space-y-1.5'>
+            <label
+              htmlFor='contactNumber'
+              className='text-sm font-medium text-gray-700 flex items-center gap-1.5'>
+              <Phone
+                size={15}
+                className='text-gray-500'
+              />
+              Contact Number
+              <span className='text-red-500'>*</span>
+            </label>
+            <Input
+              id='contactNumber'
+              className='h-10 border-gray-300 focus:border-primary focus:ring-primary/30'
+              placeholder='Enter your contact number'
+              {...register("contactNumber", {
+                required: "Contact number is required",
+                pattern: {
+                  value: /^\d{10,15}$/,
+                  message: "Must be 10-15 digits",
+                },
+              })}
+            />
+            {showErrorMessage("contactNumber")}
+          </div>
+
+          <div className='space-y-1.5'>
+            <label
+              htmlFor='panCardNumber'
+              className='text-sm font-medium text-gray-700 flex items-center gap-1.5'>
+              <CreditCard
+                size={15}
+                className='text-gray-500'
+              />
+              PAN Card Number
+              <span className='text-red-500'>*</span>
+            </label>
+            <Input
+              type='text'
+              id='panCardNumber'
+              className='h-10 border-gray-300 focus:border-primary focus:ring-primary/30'
+              placeholder='Enter your PAN card number'
+              {...register("panCardNumber", {
+                required: "PAN card number is required",
+                pattern: {
+                  value: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,
+                  message: "Must be in format ABCDE1234F",
+                },
+              })}
+            />
+            {showErrorMessage("panCardNumber")}
+          </div>
+        </div>
+
+        <div className='h-px bg-gray-200 my-6'></div>
+
+        <div className='mb-4'>
+          <div className='flex items-center gap-2 mb-2'>
+            <Lock
+              size={18}
+              className='text-primary'
+            />
+            <h2 className='text-xl font-semibold text-gray-900'>Security</h2>
+          </div>
+          <p className='text-gray-600 ml-6'>
+            Create a secure password for your account.
           </p>
         </div>
 
-        <div className='rounded-md p-4 mx-4 mb-4 flex flex-col gap-8'>
-          <div className='flex gap-4'>
-            <div className='flex w-full flex-col'>
-              <label
-                className={formLabelStyle}
-                htmlFor='email'>
-                Email
-              </label>
-              <Input
-                id='email'
-                className={inputStyle}
-                placeholder='Enter email address here'
-                {...register("email", {
-                  required: "Email is required.",
-                  pattern: {
-                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                    message: "Invalid email format",
-                  },
-                })}
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+          <div className='space-y-1.5'>
+            <label
+              htmlFor='password'
+              className='text-sm font-medium text-gray-700 flex items-center gap-1.5'>
+              <Lock
+                size={15}
+                className='text-gray-500'
               />
-              {showErrorMessage("email")}
-            </div>
-            <div className='flex w-full flex-col'>
-              <label
-                className={formLabelStyle}
-                htmlFor='fullname'>
-                Full Name
-              </label>
-              <Input
-                id='fullname'
-                className={inputStyle}
-                placeholder='Enter full name here'
-                {...register("fullname", {
-                  required: "Full name is required.",
-                  minLength: {
-                    value: 2,
-                    message: "Full name must be at least 2 characters",
-                  },
-                })}
-              />
-              {showErrorMessage("fullname")}
-            </div>
-          </div>
-          <div className='flex gap-4'>
-            <div className='flex w-full flex-col'>
-              <label
-                className={formLabelStyle}
-                htmlFor='contactNumber'>
-                Contact Number
-              </label>
-              <Input
-                id='contactNumber'
-                className={inputStyle}
-                placeholder='Enter Contact Number here'
-                {...register("contactNumber", {
-                  required: "Contact Number is required.",
-                  pattern: {
-                    value: /^\d{10,15}$/,
-                    message: "Invalid contact number",
-                  },
-                })}
-              />
-              {showErrorMessage("contactNumber")}
-            </div>
-            <div className='flex w-full flex-col'>
-              <label
-                className={formLabelStyle}
-                htmlFor='panCardNumber'>
-                Pan Card Number
-              </label>
-              <Input
-                type='text'
-                id='panCardNumber'
-                className={inputStyle}
-                placeholder='Enter pan card number'
-                {...register("panCardNumber", {
-                  required: "PAN card number is required",
-                  pattern: {
-                    value: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,
-                    message: "Invalid PAN card number",
-                  },
-                })}
-              />
-              {showErrorMessage("panCardNumber")}
-            </div>
+              Password
+              <span className='text-red-500'>*</span>
+            </label>
+            <Input
+              id='password'
+              type='password'
+              className='h-10 border-gray-300 focus:border-primary focus:ring-primary/30'
+              placeholder='Create a password'
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+                pattern: {
+                  value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])/,
+                  message:
+                    "Must include uppercase, lowercase, number, and special character",
+                },
+              })}
+            />
+            {showErrorMessage("password")}
           </div>
 
-          <div className='flex gap-4'>
-            <div className='flex w-full flex-col'>
-              <label
-                className={formLabelStyle}
-                htmlFor='password'>
-                Password
-              </label>
-              <Input
-                id='password'
-                type='password'
-                className={inputStyle}
-                placeholder='Enter password here'
-                {...register("password", {
-                  required: "Password is required.",
-                  minLength: {
-                    value: 8,
-                    message: "Password must be at least 8 characters",
-                  },
-                  pattern: {
-                    value:
-                      /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])/,
-                    message:
-                      "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
-                  },
-                })}
+          <div className='space-y-1.5'>
+            <label
+              htmlFor='confirmPassword'
+              className='text-sm font-medium text-gray-700 flex items-center gap-1.5'>
+              <Lock
+                size={15}
+                className='text-gray-500'
               />
-              {showErrorMessage("password")}
-            </div>
-            <div className=' flex w-full flex-col'>
-              <label
-                className={formLabelStyle}
-                htmlFor='confirmPassword'>
-                Confirm Password
-              </label>
-              <Input
-                id='confirmPassword'
-                type='password'
-                className={inputStyle}
-                placeholder='Re-enter password here'
-                {...register("confirmPassword", {
-                  required: "Confirm password is required.",
-                  validate: (value) =>
-                    value === password || "Passwords do not match.",
-                })}
-              />
-              {showErrorMessage("confirmPassword")}
-            </div>
+              Confirm Password
+              <span className='text-red-500'>*</span>
+            </label>
+            <Input
+              id='confirmPassword'
+              type='password'
+              className='h-10 border-gray-300 focus:border-primary focus:ring-primary/30'
+              placeholder='Confirm your password'
+              {...register("confirmPassword", {
+                required: "Please confirm your password",
+                validate: (value) =>
+                  value === password || "Passwords do not match",
+              })}
+            />
+            {showErrorMessage("confirmPassword")}
           </div>
+        </div>
 
-          <div className='flex justify-end'>
-            <Button
-              type='button'
-              className={primaryButtonStyle}
-              onClick={handleNext}>
-              Submit & Continue
-            </Button>
-          </div>
+        <div className='flex justify-end pt-4'>
+          <Button
+            type='button'
+            className='bg-primary hover:bg-primary/90 text-white px-6 h-10'
+            onClick={handleNext}>
+            Continue to Business Info
+          </Button>
         </div>
       </div>
     </div>

@@ -1,8 +1,19 @@
-import ManageTenders from "@/components/Admin/ManageTenders/ManageTenders";
 import Heading from "@/components/Shared/Heading";
+import ManageTenders from "@/components/Tender/For-Admin/ManageTenders";
 import React from "react";
 
-const Tenders = () => {
+async function getTenders() {
+  const promise = new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, 1000);
+  });
+  return promise;
+}
+
+const Tenders = async () => {
+  await getTenders();
+
   return (
     <div className='pt-[3.8rem]'>
       <Heading

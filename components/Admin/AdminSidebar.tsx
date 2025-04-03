@@ -22,6 +22,7 @@ import {
   LayoutDashboard,
   Shield,
   Users,
+  LogOut,
 } from "lucide-react";
 
 const adminSidebarLinks = [
@@ -30,7 +31,6 @@ const adminSidebarLinks = [
     link: "/admin",
     icon: LayoutDashboard,
   },
-
   {
     title: "Create Tender",
     link: "/admin/create-tender",
@@ -72,53 +72,137 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar className='pt-[3.8rem] flex justify-center items-center'>
-      <SidebarGroup className='px-0 pt-[5rem] flex justify-center items-center'>
-        <SidebarGroupLabel>
-          <div className='flex flex-col items-center justify-center mb-14 mt-8'>
-            <Avatar className='size-16 cursor-pointer'>
-              <AvatarImage src='https://github.com/shadcn.png' />
-              <AvatarFallback>CN</AvatarFallback>
+    <Sidebar className='pt-[3.8rem] border-r border-gray-200 bg-white shadow-sm'>
+      <SidebarGroup>
+        <SidebarGroupLabel className='flex flex-col h-auto'>
+          <div className='flex flex-col items-center justify-center pt-2 px-4'>
+            <Avatar className='size-12 border-2 border-primary/20 mb-3 shadow-sm'>
+              <AvatarImage
+                src='https://github.com/shadcn.png'
+                alt='Admin Avatar'
+              />
+              <AvatarFallback className='bg-primary/10 text-primary text-xl font-medium'>
+                RN
+              </AvatarFallback>
             </Avatar>
-            <p className='text-base cursor-pointer'>Rishabh Negi</p>
+            <p className='font-semibold text-gray-800 text-base'>
+              Rishabh Negi
+            </p>
+            <span className='text-sm text-gray-500'>Administrator</span>
           </div>
+          {/* <Separator className='mt-2' /> */}
         </SidebarGroupLabel>
-        <SidebarGroupContent className='mt-12'>
-          <ScrollArea className='h-[calc(100vh-15rem)]'>
-            <SidebarMenu className='px-3'>
-              {adminSidebarLinks.map((elm) => {
-                const isActive =
-                  elm.link === "/admin"
-                    ? pathname === elm.link
-                    : pathname.startsWith(elm.link);
-                return (
-                  <SidebarMenuItem
-                    key={elm.title}
-                    className={`m-1 font-[500] rounded-lg flex items-center justify-center cursor-pointer hover:bg-card-color-darker1 hover:text-gray-900 ${
-                      isActive ? "bg-card-color text-blue-800" : ""
-                    }`}>
-                    <SidebarMenuButton
-                      asChild
-                      className=''>
-                      <Link
-                        href={elm.link}
-                        className='py-5 pl-10'>
-                        <elm.icon
-                          className='w-10'
-                          size={40}
-                        />
-                        <span
-                          className={`text-base ${
-                            isActive ? "font-semibold" : ""
-                          }`}>
-                          {elm.title}
-                        </span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
+
+        <SidebarGroupContent className='mt-6'>
+          <ScrollArea className='h-[calc(100vh-14rem)]'>
+            <div className='px-3 py-2'>
+              <h3 className='text-xs font-medium text-gray-500 uppercase tracking-wider px-4 mb-2'>
+                Main Menu
+              </h3>
+              <SidebarMenu>
+                {adminSidebarLinks.slice(0, 4).map((item) => {
+                  const isActive =
+                    item.link === "/admin"
+                      ? pathname === item.link
+                      : pathname.startsWith(item.link);
+                  return (
+                    <SidebarMenuItem
+                      key={item.title}
+                      className={`mb-1 rounded-lg ${
+                        isActive
+                          ? "bg-primary/10 text-primary font-medium"
+                          : "hover:bg-gray-100 text-gray-800"
+                      }`}>
+                      <SidebarMenuButton asChild>
+                        <Link
+                          href={item.link}
+                          className='py-2.5 px-4 flex items-center'>
+                          <item.icon
+                            className={`mr-3 h-5 w-5 ${
+                              isActive ? "text-primary" : "text-gray-500"
+                            }`}
+                          />
+                          <span>{item.title}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
+              </SidebarMenu>
+
+              <h3 className='text-xs font-medium text-gray-500 uppercase tracking-wider px-4 mb-2 mt-6'>
+                Management
+              </h3>
+              <SidebarMenu>
+                {adminSidebarLinks.slice(4, 7).map((item) => {
+                  const isActive = pathname.startsWith(item.link);
+                  return (
+                    <SidebarMenuItem
+                      key={item.title}
+                      className={`mb-1 rounded-lg ${
+                        isActive
+                          ? "bg-primary/10 text-primary font-medium"
+                          : "hover:bg-gray-100 text-gray-800"
+                      }`}>
+                      <SidebarMenuButton asChild>
+                        <Link
+                          href={item.link}
+                          className='py-2.5 px-4 flex items-center'>
+                          <item.icon
+                            className={`mr-3 h-5 w-5 ${
+                              isActive ? "text-primary" : "text-gray-500"
+                            }`}
+                          />
+                          <span>{item.title}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
+              </SidebarMenu>
+
+              <h3 className='text-xs font-medium text-gray-500 uppercase tracking-wider px-4 mb-2 mt-6'>
+                System
+              </h3>
+              <SidebarMenu>
+                {adminSidebarLinks.slice(7).map((item) => {
+                  const isActive = pathname.startsWith(item.link);
+                  return (
+                    <SidebarMenuItem
+                      key={item.title}
+                      className={`mb-1 rounded-lg ${
+                        isActive
+                          ? "bg-primary/10 text-primary font-medium"
+                          : "hover:bg-gray-100 text-gray-800"
+                      }`}>
+                      <SidebarMenuButton asChild>
+                        <Link
+                          href={item.link}
+                          className='py-2.5 px-4 flex items-center'>
+                          <item.icon
+                            className={`mr-3 h-5 w-5 ${
+                              isActive ? "text-primary" : "text-gray-500"
+                            }`}
+                          />
+                          <span>{item.title}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
+
+                <SidebarMenuItem className='mb-1 rounded-lg hover:bg-red-50 text-red-600'>
+                  <SidebarMenuButton asChild>
+                    <Link
+                      href='/auth/login'
+                      className='py- px-4 flex items-center'>
+                      <LogOut className='mr-3 h-5 w-5 text-red-600' />
+                      <span>Logout</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </div>
           </ScrollArea>
         </SidebarGroupContent>
       </SidebarGroup>

@@ -1,6 +1,6 @@
 "use client";
-import CreateTender from "@/components/Admin/CreateTender/CreateTender";
 import Heading from "@/components/Shared/Heading";
+import CreateTender from "@/components/Tender/For-Admin/CreateTender";
 import React from "react";
 
 const page = () => {

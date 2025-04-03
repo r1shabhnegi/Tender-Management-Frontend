@@ -8,7 +8,9 @@ export const textWithHover =
   "text-text-color cursor-pointer transition-colors duration-300 hover:text-text-hover-color";
 
 export const primaryButtonStyle =
-  "bg-primary-1 rounded-[0.6rem] text-[0.9rem] font-semibold hover:bg-blue-700 transition-colors duration-300";
+  "w-full bg-gradient-to-r from-accent to-accent/80 hover:bg-accent/90 text-white py-2.5 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2 shadow-sm group";
 
 export const secondaryButtonStyle =
-  "bg-[#0077C2] font-semibold rounded-lg hover:bg-blue-300 text-gray-900 transition-colors duration-300";
+  "bg-white border border-accent text-accent rounded-lg hover:bg-accent/5 hover:text-accent px-3";
+
+export const borderStyle = "border-gray-300";
